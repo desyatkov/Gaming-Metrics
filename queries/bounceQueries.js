@@ -4,29 +4,23 @@ const CASINO_UK = `
         last_week.industry_name AS industry,
         'Casino UK' as vertical,
         'BR' AS metric,
-        sum(last_5_weeks.BR) as last_5_weeks,
         sum(last_week.BR) as value
     FROM
         (
             select 
                 industry_name, 
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(bounced) as float) / cast(sum(visits) as float) as float) as BR
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        count(distinct bounced_visit_iid) AS bounced,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
+                        count(distinct bounced_visit_iid) AS bounced
                     from 
                         v_funnel_facts_analysts
                     where
                         unified_date BETWEEN trunc(getdate()-9) and trunc(getdate()-2) and traffic_type = 'users' and site_name is not null
-                        and industry_name = 'Gaming' and site_id IN  (252 ,130 ,254 ,242,248 ,19 ,255 ,244) and country_name = 'United Kingdom'
+                        and industry_name = 'Gaming' and site_id IN  (252, 130, 254, 242, 248, 19, 255, 244) and country_name = 'United Kingdom'
                     group by
                         1
                 )
@@ -38,18 +32,13 @@ const CASINO_UK = `
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        count(distinct bounced_visit_iid) bounced ,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
+                        count(distinct bounced_visit_iid) bounced
                     from
                         v_funnel_facts_analysts
                     where
@@ -73,24 +62,18 @@ const SPORTS_UK = `
         last_week.industry_name AS industry,
         'Sports UK' as vertical,
         'BR' AS metric,
-        sum(last_5_weeks.BR) as last_5_weeks,
         sum(last_week.BR) as value
     FROM
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
-                cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
+                cast(cast(sum(bounced) as float) / cast(sum(visits) as float) as float) as BR
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        count(distinct bounced_visit_iid) bounced,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
+                        count(distinct bounced_visit_iid) bounced
                     from
                         v_funnel_facts_analysts
                     where
@@ -108,17 +91,13 @@ const SPORTS_UK = `
             select
                 industry_name,
                 sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        count(distinct bounced_visit_iid) bounced,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
+                        count(distinct bounced_visit_iid) bounced
                     from
                         v_funnel_facts_analysts
                     where
@@ -142,24 +121,18 @@ const BINGO_UK = `
         last_week.industry_name AS industry,
         'Bingo UK' as vertical,
         'BR' AS metric,
-        sum(last_5_weeks.BR) as last_5_weeks,
         sum(last_week.BR) as value
     FROM
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
-                        count(distinct bounced_visit_iid) bounced,
-                        sum(revenue_factored) as revenue_factored
+                        count(distinct bounced_visit_iid) bounced
                     from
                         v_funnel_facts_analysts
                     where
@@ -176,8 +149,6 @@ const BINGO_UK = `
         (
             select 
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
             from
                 (
@@ -185,9 +156,6 @@ const BINGO_UK = `
                         industry_name,
                         count (distinct visit_iid) as visits,
                         count(distinct bounced_visit_iid) bounced,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
                     where
@@ -211,24 +179,19 @@ const POKER_UK = `
         last_week.industry_name AS industry, 
         'Poker UK'  as vertical,
         'BR' AS metric, 
-        sum(last_5_weeks.BR) as last_5_weeks,
         sum(last_week.BR) as value
     FROM
         (
             select 
                 industry_name,
                 sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
             from
                 (
                     select 
                         industry_name,
                         count (distinct visit_iid) as visits, 
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
                         count(distinct bounced_visit_iid) bounced,
-                        sum(revenue_factored) as revenue_factored
                     from 
                         v_funnel_facts_analysts
                     where
@@ -246,7 +209,6 @@ const POKER_UK = `
             select
                 industry_name,
                 sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
             from
                 (
@@ -254,9 +216,6 @@ const POKER_UK = `
                         industry_name,
                         count (distinct visit_iid) as visits,
                         count(distinct bounced_visit_iid) bounced,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
                     where
@@ -280,24 +239,18 @@ const SPORTS_AU = `
         last_week.industry_name AS industry,
         'Sports AU' as vertical,
         'BR' AS metric, 
-        sum(last_5_weeks.BR) as last_5_weeks,
         sum(last_week.BR) as value
     FROM
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
                         count(distinct bounced_visit_iid) bounced,
-                        sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
                     where
@@ -315,17 +268,13 @@ const SPORTS_AU = `
             select
                 industry_name,
                 sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
                         count(distinct bounced_visit_iid) bounced,
-                        sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
                     where
@@ -349,24 +298,18 @@ const SPORTS_FR = `
         last_week.industry_name AS industry, 
         'Sports FR' as vertical ,
         'BR' AS metric, 
-        sum(last_5_weeks.BR) as last_5_weeks,
         sum(last_week.BR) as value
     FROM
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
                         count(distinct bounced_visit_iid) bounced,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
                     where
@@ -384,7 +327,6 @@ const SPORTS_FR = `
             select 
                 industry_name,
                 sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
             from
                 (
@@ -392,9 +334,6 @@ const SPORTS_FR = `
                         industry_name,
                         count (distinct visit_iid) as visits,
                         count(distinct bounced_visit_iid) bounced ,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
                     where
@@ -418,24 +357,18 @@ const SPORTS_RO = `
         last_week.industry_name AS industry,
         'Sports RO' as vertical,
         'BR' AS metric, 
-        sum(last_5_weeks.BR) as last_5_weeks,
         sum(last_week.BR) as value
     FROM
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
                         count(distinct bounced_visit_iid) bounced,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
                     where
@@ -453,7 +386,6 @@ const SPORTS_RO = `
             select 
                 industry_name,
                 sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
             from
                 (
@@ -461,9 +393,6 @@ const SPORTS_RO = `
                         industry_name,
                         count (distinct visit_iid) as visits,
                         count(distinct bounced_visit_iid) bounced,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
                     where

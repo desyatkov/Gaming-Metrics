@@ -4,7 +4,6 @@ const CASINO_UK = `
         last_week.industry_name AS industry, 
         'Casino UK' AS vertical, 
         'Commission' AS metric,
-        SUM(last_5_weeks.revenue) AS last_5_weeks, 
         SUM(last_week.revenue) AS value,
         ((last_week.revenue - last_5_weeks.revenue) / (last_5_weeks.revenue + 0.1)) AS trend
     FROM
@@ -15,10 +14,7 @@ const CASINO_UK = `
             FROM
                 (
                     SELECT
-                        industry_name,
-                        COUNT(DISTINCT visit_iid) AS visits,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
+                        industry_name,                  
 		                SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts
@@ -30,7 +26,7 @@ const CASINO_UK = `
                 )
             GROUP BY
                 1
-        )  
+        ) 
         AS last_week
     INNER JOIN
         (
@@ -41,9 +37,6 @@ const CASINO_UK = `
                 (
                     SELECT
                         industry_name,
-                        COUNT(DISTINCT visit_iid) AS visits,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
                         SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts
@@ -68,7 +61,6 @@ const SPORTS_UK = `
         last_week.industry_name AS industry, 
         'Sports UK' AS vertical, 
         'Commission' AS metric,
-        SUM(last_5_weeks.revenue) AS last_5_weeks,
         SUM(last_week.revenue) AS value,
         ((last_week.revenue - last_5_weeks.revenue) / (last_5_weeks.revenue + 0.1)) AS trend
     FROM
@@ -80,9 +72,6 @@ const SPORTS_UK = `
                 (
                     SELECT
                         industry_name,
-                        COUNT(DISTINCT visit_iid) AS visits,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
                         SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts
@@ -105,9 +94,6 @@ const SPORTS_UK = `
                 (
                     SELECT 
                         industry_name,
-                        COUNT(DISTINCT visit_iid) AS visits,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
                         SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts
@@ -132,7 +118,6 @@ const BINGO_UK = `
         last_week.industry_name AS industry, 
         'Bingo UK' AS vertical, 
         'Commission' AS metric,
-        SUM(last_5_weeks.revenue) AS last_5_weeks, 
         SUM(last_week.revenue) AS value,
         ((last_week.revenue - last_5_weeks.revenue) / (last_5_weeks.revenue + 0.1)) AS trend
     FROM
@@ -144,9 +129,6 @@ const BINGO_UK = `
                 (
                     SELECT 
                         industry_name,
-                        COUNT(DISTINCT visit_iid) AS visits,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
                         SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts
@@ -169,9 +151,6 @@ const BINGO_UK = `
                 (
                     SELECT
                         industry_name,
-                        COUNT(DISTINCT visit_iid) AS visits,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
                         SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts
@@ -196,7 +175,6 @@ const POKER_UK = `
         last_week.industry_name AS industry,
         'Poker UK' AS vertical,
         'Commission' AS metric,
-        SUM(last_5_weeks.revenue) AS last_5_weeks,
         SUM(last_week.revenue) AS value,
         ((last_week.revenue - last_5_weeks.revenue) / (last_5_weeks.revenue + 0.1)) AS trend
     FROM
@@ -208,9 +186,6 @@ const POKER_UK = `
                 (
                     SELECT
                         industry_name,
-                        COUNT(DISTINCT visit_iid) AS visits,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
                         SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts
@@ -233,9 +208,6 @@ const POKER_UK = `
                 (
                     SELECT
                         industry_name,
-                        COUNT(DISTINCT visit_iid) AS visits,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
                         SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts
@@ -251,7 +223,7 @@ const POKER_UK = `
         AS last_5_weeks
     ON last_5_weeks.industry_name = last_week.industry_name 
     GROUP BY
-        1 ,2   
+        1, 2   
 `;
 
 // HorseRacing Mobile AU, HorseRacing AU, Sports Betting Mobile AU, Sports Betting AU
@@ -260,7 +232,6 @@ const SPORTS_AU = `
         last_week.industry_name AS industry,
         'Sports AU' AS vertical,
         'Commission' AS metric,
-        SUM(last_5_weeks.revenue) AS last_5_weeks,
         SUM(last_week.revenue) AS value,
         ((last_week.revenue - last_5_weeks.revenue) / (last_5_weeks.revenue + 0.1)) AS trend
     FROM
@@ -272,9 +243,6 @@ const SPORTS_AU = `
                 (
                     SELECT
                         industry_name,
-                        COUNT(DISTINCT visit_iid) AS visits,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
                         SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts
@@ -297,9 +265,6 @@ const SPORTS_AU = `
                 (
                     SELECT 
                         industry_name,
-                        COUNT(DISTINCT visit_iid) AS visits,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
                         SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts
@@ -315,7 +280,7 @@ const SPORTS_AU = `
         AS last_5_weeks
     ON last_5_weeks.industry_name = last_week.industry_name
     GROUP BY
-        1 ,2
+        1, 2
 `;
 
 // Sports Betting FR, Sports Betting Mobile FR
@@ -324,7 +289,6 @@ const SPORTS_FR = `
         last_week.industry_name AS industry,
         'Sports FR' AS vertical,
         'Commission' AS metric,
-        SUM(last_5_weeks.revenue) AS last_5_weeks,
         SUM(last_week.revenue) AS value,
         ((last_week.revenue - last_5_weeks.revenue) / (last_5_weeks.revenue + 0.1)) AS trend
     FROM
@@ -336,9 +300,6 @@ const SPORTS_FR = `
                 (
                     SELECT 
                         industry_name,
-                        COUNT(DISTINCT visit_iid) AS visits,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
                         SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts
@@ -361,9 +322,6 @@ const SPORTS_FR = `
                 (
                     SELECT 
                         industry_name,
-                        COUNT(DISTINCT visit_iid) AS visits,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
                         SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts
@@ -388,7 +346,6 @@ const SPORTS_RO = `
         last_week.industry_name AS industry,
         'Sports RO' AS vertical,
         'Commission' AS metric,
-        SUM(last_5_weeks.revenue) AS last_5_weeks,
         SUM(last_week.revenue) AS value,
         ((last_week.revenue - last_5_weeks.revenue) / (last_5_weeks.revenue + 0.1)) AS trend
     FROM
@@ -400,9 +357,6 @@ const SPORTS_RO = `
                 (
                     SELECT
                         industry_name,
-                        COUNT(DISTINCT visit_iid) AS visits,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
                         SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts
@@ -425,9 +379,6 @@ const SPORTS_RO = `
                 (
                     SELECT
                         industry_name,
-                        COUNT(DISTINCT visit_iid) AS visits,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
                         SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts

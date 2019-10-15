@@ -4,22 +4,17 @@ const CASINO_UK = `
         last_week.industry_name AS industry, 
         'Casino UK' as vertical, 
         'EPV' AS metric,
-        sum(last_5_weeks.EPV) as last_5_weeks,
         sum(last_week.EPV) as value
     FROM
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(sum(revenue_factored) / cast(sum(visits) as float) as float) as EPV
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
                         sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
@@ -37,16 +32,12 @@ const CASINO_UK = `
         (
             select 
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(sum(revenue_factored)/cast(sum(visits) as float) as float) as EPV
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
                         sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
@@ -71,22 +62,17 @@ const SPORTS_UK = `
         last_week.industry_name AS industry,
         'Sports UK' as Vertical,
         'EPV' AS metric, 
-        sum(last_5_weeks.EPV) as last_5_weeks,
         sum(last_week.EPV) as value
     FROM
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(sum(revenue_factored)/cast(sum(visits) as float) as float) as EPV
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits, 
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
                         sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
@@ -104,16 +90,12 @@ const SPORTS_UK = `
         (
             select 
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(sum(revenue_factored)/cast(sum(visits) as float) as float) as EPV
             from
                 (
                     select 
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
                         sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
@@ -138,22 +120,17 @@ const BINGO_UK = `
         last_week.industry_name AS industry,
         'Bingo UK' as vertical,
         'EPV' AS metric,
-        sum(last_5_weeks.EPV) as last_5_weeks,
         sum(last_week.EPV) as value
     FROM
         (
             select 
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(sum(revenue_factored)/cast(sum(visits) as float) as float) as EPV
             from
                 (
                     select 
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
                         sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
@@ -171,16 +148,12 @@ const BINGO_UK = `
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(sum(revenue_factored)/cast(sum(visits) as float) as float) as EPV
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
                         sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
@@ -211,16 +184,12 @@ const POKER_UK = `
         (
             select 
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(sum(revenue_factored)/cast(sum(visits) as float) as float) as EPV
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
                         sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
@@ -238,16 +207,12 @@ const POKER_UK = `
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(sum(revenue_factored)/cast(sum(visits) as float) as float) as EPV
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
                         sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
@@ -272,22 +237,17 @@ const SPORTS_AU = `
         last_week.industry_name AS industry, 
         'Sports AU'  as vertical ,
         'EPV' AS metric,
-         sum(last_5_weeks.EPV) as last_5_weeks,
          sum(last_week.EPV) as value
     FROM
         (
             select 
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(sum(revenue_factored)/cast(sum(visits) as float) as float) as EPV
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
                         sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
@@ -305,16 +265,12 @@ const SPORTS_AU = `
         (
             select 
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(sum(revenue_factored)/cast(sum(visits) as float) as float) as EPV
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
                         sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
@@ -339,22 +295,17 @@ const SPORTS_FR = `
         last_week.industry_name AS industry,
         'Sports FR'  as vertical ,
         'EPV' AS metric,
-        sum(last_5_weeks.EPV) as last_5_weeks,
         sum(last_week.EPV) as value
     FROM
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(sum(revenue_factored)/cast(sum(visits) as float) as float) as EPV
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
                         sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
@@ -372,16 +323,12 @@ const SPORTS_FR = `
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(sum(revenue_factored)/cast(sum(visits) as float) as float) as EPV
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
                         sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
@@ -406,22 +353,17 @@ const SPORTS_RO = `
         last_week.industry_name AS industry,
         'Sports RO' as vertical ,
         'EPV' AS metric,
-        sum(last_5_weeks.EPV) as last_5_weeks,
         sum(last_week.EPV) as value
     FROM
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(sum(revenue_factored)/cast(sum(visits) as float) as float) as EPV
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
                         sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
@@ -439,16 +381,12 @@ const SPORTS_RO = `
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(sum(revenue_factored)/cast(sum(visits) as float) as float) as EPV
             from
                 (
                     select
                         industry_name,
                         count (distinct visit_iid) as visits,
-                        count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
                         sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts

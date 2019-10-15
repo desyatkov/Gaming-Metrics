@@ -4,15 +4,12 @@ const CASINO_UK = `
         last_week.industry_name AS industry, 
         'Casino UK' AS vertical, 
         'CTR' AS metric,
-        SUM(last_5_weeks.CTR) AS last_5_weeks,
         SUM(last_week.CTR) AS value,
         ((last_week.CTR - last_5_weeks.CTR) / (last_5_weeks.CTR + 0.001)) AS trend
     FROM
         (
             SELECT
                 industry_name,
-                SUM(visits) AS visits,
-                SUM(revenue_factored) AS revenue,
                 CAST(CAST(SUM(clickouts) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS CTR
             FROM
                 (
@@ -20,8 +17,6 @@ const CASINO_UK = `
                         industry_name,
                         COUNT(DISTINCT visit_iid) AS visits,
                         COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
-                        SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts
                     WHERE 
@@ -38,8 +33,6 @@ const CASINO_UK = `
         (
             SELECT
                 industry_name,
-                SUM(visits) AS visits,
-                SUM(revenue_factored) AS revenue,
                 CAST(CAST(SUM(clickouts) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS CTR
             FROM
                 (
@@ -47,8 +40,6 @@ const CASINO_UK = `
                         industry_name,
                         COUNT(DISTINCT visit_iid) AS visits,
                         COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
-                        SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts
                     WHERE 
@@ -72,15 +63,12 @@ const SPORTS_UK = `
         last_week.industry_name AS industry,
         'Sports UK' AS vertical,
         'CTR' AS metric,
-        SUM(last_5_weeks.CTR) AS last_5_weeks,
         SUM(last_week.CTR) as value,
         ((last_week.CTR - last_5_weeks.CTR) / (last_5_weeks.CTR + 0.001)) AS trend
     FROM
         (
             SELECT
                 industry_name,
-                SUM(visits) AS visits,
-                SUM(revenue_factored) AS revenue,
                 CAST(CAST(SUM(clickouts) AS FLOAT) / CAST(SUM(visits) AS float) AS FLOAT) AS CTR
             FROM
                 (
@@ -88,8 +76,6 @@ const SPORTS_UK = `
                         industry_name,
                         COUNT(DISTINCT visit_iid) AS visits,
                         COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
-                        SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts
                     WHERE
@@ -106,8 +92,6 @@ const SPORTS_UK = `
         (
             SELECT
                 industry_name,
-                SUM(visits) AS visits,
-                SUM(revenue_factored) AS revenue,
                 CAST(CAST(SUM(clickouts) AS FLOAT) / CAST(SUM(visits) AS float) AS float) AS CTR
             FROM
                 (
@@ -115,8 +99,6 @@ const SPORTS_UK = `
                         industry_name,
                         COUNT(DISTINCT visit_iid) AS visits,
                         COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
-                        SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts
                     WHERE
@@ -140,15 +122,12 @@ const BINGO_UK = `
         last_week.industry_name AS industry,  
         'Bingo UK' AS vertical, 
         'CTR' AS metric,
-        SUM(last_5_weeks.CTR) AS last_5_weeks,
         SUM(last_week.CTR) AS value,
         ((last_week.CTR - last_5_weeks.CTR) / (last_5_weeks.CTR + 0.001)) AS trend
     FROM
         (
             SELECT 
                 industry_name,
-                SUM(visits) AS visits,
-                SUM(revenue_factored) AS revenue,
                 CAST(CAST(SUM(clickouts) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS CTR
             FROM    
                 (
@@ -156,8 +135,6 @@ const BINGO_UK = `
                         industry_name,
                         COUNT(DISTINCT visit_iid) AS visits,
                         COUNT(DISTINCT visit_iid_product) AS clickouts,
-                        SUM(commission) AS commission,
-                        SUM(revenue_factored) AS revenue_factored
                     FROM
                         v_funnel_facts_analysts
                     WHERE
@@ -174,8 +151,6 @@ const BINGO_UK = `
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(clickouts) as float)/cast(sum(visits) as float) as float) as CTR
             from
                 (
@@ -183,8 +158,6 @@ const BINGO_UK = `
                         industry_name,
                         count (distinct visit_iid) as visits,
                         count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
                     where
@@ -208,15 +181,12 @@ const POKER_UK = `
         last_week.industry_name AS industry, 
         'Poker UK' AS vertical, 
         'CTR' AS metric,
-        SUM(last_5_weeks.CTR) AS last_5_weeks,
         SUM(last_week.CTR) AS value,
         ((last_week.CTR - last_5_weeks.CTR) / (last_5_weeks.CTR + 0.001)) AS trend
     FROM
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(clickouts) as float)/cast(sum(visits) as float) as float) as CTR
             from
                 (
@@ -224,8 +194,6 @@ const POKER_UK = `
                         industry_name,
                         count (distinct visit_iid) as visits,
                         count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
                     where
@@ -242,8 +210,6 @@ const POKER_UK = `
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(clickouts) as float)/cast(sum(visits) as float) as float) as CTR
             from
                 (
@@ -251,8 +217,6 @@ const POKER_UK = `
                         industry_name,
                         count (distinct visit_iid) as visits,
                         count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
                     where
@@ -276,15 +240,12 @@ const SPORTS_AU = `
         last_week.industry_name AS industry, 
         'Sports AU' AS vertical, 
         'CTR' AS metric,
-        SUM(last_5_weeks.CTR) AS last_5_weeks,
         SUM(last_week.CTR) AS value,
         ((last_week.CTR - last_5_weeks.CTR) / (last_5_weeks.CTR + 0.001)) AS trend
     FROM
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(clickouts) as float)/cast(sum(visits) as float) as float) as CTR
             from
                 (
@@ -292,8 +253,6 @@ const SPORTS_AU = `
                         industry_name,
                         count (distinct visit_iid) as visits,
                         count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
                     where
@@ -310,8 +269,6 @@ const SPORTS_AU = `
         (
             select 
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(clickouts) as float)/cast(sum(visits) as float) as float) as CTR
             from
                 (
@@ -319,8 +276,6 @@ const SPORTS_AU = `
                         industry_name,
                         count (distinct visit_iid) as visits,
                         count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
                     where
@@ -344,15 +299,12 @@ const SPORTS_FR = `
         last_week.industry_name AS industry, 
         'Sports FR' AS vertical, 
         'CTR' AS metric,
-        SUM(last_5_weeks.CTR) AS last_5_weeks,
         SUM(last_week.CTR) AS value,
         ((last_week.CTR - last_5_weeks.CTR) / (last_5_weeks.CTR + 0.001)) AS trend
     FROM
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(clickouts) as float)/cast(sum(visits) as float) as float) as CTR
             from
                 (
@@ -360,8 +312,6 @@ const SPORTS_FR = `
                         industry_name,
                         count (distinct visit_iid) as visits,
                         count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
                     where
@@ -378,8 +328,6 @@ const SPORTS_FR = `
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(clickouts) as float)/cast(sum(visits) as float) as float) as CTR
             from
                 (
@@ -387,8 +335,6 @@ const SPORTS_FR = `
                         industry_name,
                         count (distinct visit_iid) as visits,
                         count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
                     where
@@ -412,15 +358,12 @@ const SPORTS_RO = `
         last_week.industry_name AS industry, 
         'Sports RO' AS vertical,
         'CTR' AS metric,
-        SUM(last_5_weeks.CTR) AS last_5_weeks,
         SUM(last_week.CTR) AS value,
         ((last_week.CTR - last_5_weeks.CTR) / (last_5_weeks.CTR + 0.001)) AS trend
     FROM
         (
             select 
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(clickouts) as float)/cast(sum(visits) as float) as float) as CTR
             from
                 (
@@ -428,8 +371,6 @@ const SPORTS_RO = `
                         industry_name,
                         count (distinct visit_iid) as visits,
                         count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
                     where
@@ -446,8 +387,6 @@ const SPORTS_RO = `
         (
             select
                 industry_name,
-                sum(visits) as visits,
-                sum(revenue_factored) as revenue,
                 cast(cast(sum(clickouts) as float)/cast(sum(visits) as float) as float) as CTR
             from
                 (
@@ -455,8 +394,6 @@ const SPORTS_RO = `
                         industry_name,
                         count (distinct visit_iid) as visits,
                         count (distinct visit_iid_product) as clickouts,
-                        sum(commission) as commission,
-                        sum(revenue_factored) as revenue_factored
                     from
                         v_funnel_facts_analysts
                     where
