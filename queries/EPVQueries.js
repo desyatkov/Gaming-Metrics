@@ -1,4 +1,4 @@
-//Casino UK Vertical  (Casino ,Slots , BlackJack , Roulette)
+// Blackjack Mobile UK, Casino Mobile UK, Roulette Mobile UK, Slots Mobile UK, Blackjack UK, Casino UK, Roulette UK, Slots UK
 const CASINO_UK = `
     SELECT 
         last_week.industry_name AS industry, 
