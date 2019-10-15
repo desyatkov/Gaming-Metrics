@@ -2,57 +2,57 @@
 const CASINO_UK = `
     SELECT
         last_week.industry_name AS industry,
-        'Casino UK' as vertical,
+        'Casino UK' AS vertical,
         'BR' AS metric,
-        sum(last_week.BR) as value
+        SUM(last_week.BR) AS value
     FROM
         (
-            select 
+            SELECT 
                 industry_name, 
-                cast(cast(sum(bounced) as float) / cast(sum(visits) as float) as float) as BR
-            from
+                CAST(CAST(SUM(bounced) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
                 (
-                    select
+                    SELECT
                         industry_name,
-                        count (distinct visit_iid) as visits,
-                        count(distinct bounced_visit_iid) AS bounced
-                    from 
+                        COUNT(DISTINCT visit_iid) AS visits,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced
+                    FROM 
                         v_funnel_facts_analysts
-                    where
-                        unified_date BETWEEN trunc(getdate()-9) and trunc(getdate()-2) and traffic_type = 'users' and site_name is not null
-                        and industry_name = 'Gaming' and site_id IN  (252, 130, 254, 242, 248, 19, 255, 244) and country_name = 'United Kingdom'
-                    group by
+                    WHERE
+                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) AND traffic_type = 'users' AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' AND site_id IN(252, 130, 254, 242, 248, 19, 255, 244) AND country_name = 'United Kingdom'
+                    GROUP BY
                         1
                 )
-            group by
+            GROUP BY
                 1
         )
-        as last_week
+        AS last_week
     INNER JOIN
         (
-            select
+            SELECT
                 industry_name,
-                cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
-            from
+                CAST(CAST(SUM(bounced) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
                 (
-                    select
+                    SELECT
                         industry_name,
-                        count (distinct visit_iid) as visits,
-                        count(distinct bounced_visit_iid) bounced
-                    from
+                        COUNT(DISTINCT visit_iid) AS visits,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced
+                    FROM
                         v_funnel_facts_analysts
-                    where
-                        unified_date between trunc(getdate()-38) AND trunc(getdate()-31) and traffic_type = 'users' and site_name is not null
-                        and industry_name = 'Gaming' and site_id IN  (252 ,130 ,254 ,242,248 ,19 ,255 ,244)   and country_name = 'United Kingdom'
-                    group by
+                    WHERE
+                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) AND traffic_type = 'users' AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' AND site_id IN(252, 130, 254, 242, 248, 19, 255, 244) AND country_name = 'United Kingdom'
+                    GROUP BY
                         1
                 )
-            group by
+            GROUP BY
                 1
         )
-        as last_5_weeks
+        AS last_5_weeks
     ON last_5_weeks.industry_name = last_week.industry_name 
-    group by
+    GROUP BY
         1, 2
 `;
 
@@ -60,58 +60,58 @@ const CASINO_UK = `
 const SPORTS_UK = `
     SELECT
         last_week.industry_name AS industry,
-        'Sports UK' as vertical,
+        'Sports UK' AS vertical,
         'BR' AS metric,
-        sum(last_week.BR) as value
+        SUM(last_week.BR) AS value
     FROM
         (
-            select
+            SELECT
                 industry_name,
-                cast(cast(sum(bounced) as float) / cast(sum(visits) as float) as float) as BR
-            from
+                CAST(CAST(SUM(bounced) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
                 (
-                    select
+                    SELECT
                         industry_name,
-                        count (distinct visit_iid) as visits,
-                        count(distinct bounced_visit_iid) bounced
-                    from
+                        COUNT(DISTINCT visit_iid) AS visits,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced
+                    FROM
                         v_funnel_facts_analysts
-                    where
-                        unified_date BETWEEN trunc(getdate()-9) and trunc(getdate()-2) and traffic_type = 'users' and site_name is not null
-                        and industry_name = 'Gaming' and site_id IN  (52 ,116) and country_name = 'United Kingdom'
-                    group by
+                    WHERE
+                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) AND traffic_type = 'users' AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' AND site_id IN(52, 116) AND country_name = 'United Kingdom'
+                    GROUP BY
                         1
                 )
-            group by
+            GROUP BY
                 1
         )
-        as last_week
+        AS last_week
     INNER JOIN
         (
-            select
+            SELECT
                 industry_name,
-                sum(visits) as visits,
-                cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
-            from
+                SUM(visits) AS visits,
+                CAST(CAST(SUM(bounced) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
                 (
-                    select
+                    SELECT
                         industry_name,
-                        count (distinct visit_iid) as visits,
-                        count(distinct bounced_visit_iid) bounced
-                    from
+                        COUNT(DISTINCT visit_iid) AS visits,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced
+                    FROM
                         v_funnel_facts_analysts
-                    where
-                        unified_date between trunc(getdate()-38) AND trunc(getdate()-31) and traffic_type = 'users' and site_name is not null
-                        and industry_name = 'Gaming' and site_id IN  (52 ,116)   and country_name = 'United Kingdom'
-                    group by
+                    WHERE
+                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) AND traffic_type = 'users' AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' AND site_id IN(52, 116) AND country_name = 'United Kingdom'
+                    GROUP BY
                         1
                 )
-            group by
+            GROUP BY
                 1
         ) 
-        as last_5_weeks
-    ON last_5_weeks.industry_name=last_week.industry_name 
-    group by
+        AS last_5_weeks
+    ON last_5_weeks.industry_name = last_week.industry_name 
+    GROUP BY
         1, 2
 `;
 
@@ -119,55 +119,55 @@ const SPORTS_UK = `
 const BINGO_UK = `
     SELECT
         last_week.industry_name AS industry,
-        'Bingo UK' as vertical,
+        'Bingo UK' AS vertical,
         'BR' AS metric,
-        sum(last_week.BR) as value
+        SUM(last_week.BR) AS value
     FROM
         (
-            select
+            SELECT
                 industry_name,
-                cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
-            from
+                CAST(CAST(SUM(bounced) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
                 (
-                    select
+                    SELECT
                         industry_name,
-                        count (distinct visit_iid) as visits,
-                        count(distinct bounced_visit_iid) bounced
-                    from
+                        COUNT(DISTINCT visit_iid) AS visits,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced
+                    FROM
                         v_funnel_facts_analysts
-                    where
-                         unified_date BETWEEN trunc(getdate()-9) and trunc(getdate()-2) and traffic_type = 'users' and site_name is not null
-                          and industry_name = 'Gaming' and site_id IN (119,86) and country_name = 'United Kingdom'
-                    group by
+                    WHERE
+                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) AND traffic_type = 'users' AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' AND site_id IN(119, 86) AND country_name = 'United Kingdom'
+                    GROUP BY
                         1
                 )
-            group by
+            GROUP BY
                 1
         )
-        as last_week
+        AS last_week
     INNER JOIN
         (
-            select 
+            SELECT 
                 industry_name,
-                cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
-            from
+                CAST(CAST(SUM(bounced) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
                 (
-                    select 
+                    SELECT 
                         industry_name,
-                        count (distinct visit_iid) as visits,
-                        count(distinct bounced_visit_iid) bounced,
-                    from
+                        COUNT(DISTINCT visit_iid) AS visits,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced
+                    FROM
                         v_funnel_facts_analysts
-                    where
-                        unified_date between trunc(getdate()-38) AND trunc(getdate()-31) and traffic_type = 'users' and site_name is not null
-                        and industry_name = 'Gaming' and site_id IN (119,86)   and country_name = 'United Kingdom'
-                    group by 
+                    WHERE
+                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) AND traffic_type = 'users' AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' AND site_id IN(119, 86) AND country_name = 'United Kingdom'
+                    GROUP BY 
                         1
                 )
-            group by 
+            GROUP BY
                 1
         ) 
-        as last_5_weeks
+        AS last_5_weeks
     ON last_5_weeks.industry_name = last_week.industry_name 
     group by 
         1, 2
@@ -177,59 +177,59 @@ const BINGO_UK = `
 const POKER_UK = `
     SELECT 
         last_week.industry_name AS industry, 
-        'Poker UK'  as vertical,
+        'Poker UK' AS vertical,
         'BR' AS metric, 
-        sum(last_week.BR) as value
+        SUM(last_week.BR) AS value
     FROM
         (
-            select 
+            SELECT
                 industry_name,
-                sum(visits) as visits,
-                cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
-            from
+                SUM(visits) AS visits,
+                CAST(CAST(SUM(bounced) AS FLOAT) / CAST(SUM(visits) AS FLOAYT) AS FLOAT) AS BR
+            FROM
                 (
-                    select 
+                    SELECT 
                         industry_name,
-                        count (distinct visit_iid) as visits, 
-                        count(distinct bounced_visit_iid) bounced,
-                    from 
+                        COUNT(DISTINCT visit_iid) AS visits, 
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced
+                    FROM 
                         v_funnel_facts_analysts
-                    where
-                        unified_date BETWEEN trunc(getdate()-9) and trunc(getdate()-2) and traffic_type = 'users' and site_name is not null
-                        and industry_name = 'Gaming' and site_id IN (177,21) and country_name = 'United Kingdom'
-                    group by 
+                    WHERE
+                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) AND traffic_type = 'users' AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' AND site_id IN(177, 21) AND country_name = 'United Kingdom'
+                    GROUP BY 
                         1
                 )
-            group by 
+            GROUP BY
                 1
         ) 
-        as last_week
+        AS last_week
     INNER JOIN
         (
-            select
+            SELECT
                 industry_name,
-                sum(visits) as visits,
-                cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
-            from
+                SUM(visits) AS visits,
+                CAST(CAST(SUM(bounced) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
                 (
-                    select 
+                    SELECT 
                         industry_name,
-                        count (distinct visit_iid) as visits,
-                        count(distinct bounced_visit_iid) bounced,
-                    from
+                        COUNT(DISTINCT visit_iid) AS visits,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced
+                    FROM
                         v_funnel_facts_analysts
-                    where
-                        unified_date between trunc(getdate()-38) AND trunc(getdate()-31) and traffic_type = 'users' and site_name is not null
-                        and industry_name = 'Gaming' and site_id IN (177,21)   and country_name = 'United Kingdom'
-                    group by
+                    WHERE
+                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) AND traffic_type = 'users' AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' AND site_id IN(177, 21) AND country_name = 'United Kingdom'
+                    GROUP BY
                         1
                 )
-            group by
+            GROUP BY
                 1
         )
-        as last_5_weeks
-    ON last_5_weeks.industry_name=last_week.industry_name 
-    group by
+        AS last_5_weeks
+    ON last_5_weeks.industry_name = last_week.industry_name 
+    GROUP BY
         1, 2
 `;
 
@@ -237,58 +237,58 @@ const POKER_UK = `
 const SPORTS_AU = `
     SELECT
         last_week.industry_name AS industry,
-        'Sports AU' as vertical,
+        'Sports AU' AS vertical,
         'BR' AS metric, 
-        sum(last_week.BR) as value
+        SUM(last_week.BR) AS value
     FROM
         (
-            select
+            SELECT
                 industry_name,
-                cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
-            from
+                CAST(CAST(SUM(bounced) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
                 (
-                    select
+                    SELECT
                         industry_name,
-                        count (distinct visit_iid) as visits,
-                        count(distinct bounced_visit_iid) bounced,
-                    from
+                        COUNT(DISTINCT visit_iid) AS visits,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced
+                    FROM
                         v_funnel_facts_analysts
-                    where
-                        unified_date BETWEEN trunc(getdate()-9) and trunc(getdate()-2) and traffic_type = 'users' and site_name is not null
-                        and industry_name = 'Gaming' and site_id IN (10052,10059,284,10028) 
-                    group by
+                    WHERE
+                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) AND traffic_type = 'users' AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' AND site_id IN(10052, 10059, 284, 10028) 
+                    GROUP BY
                         1
                 )
-            group by 
+            GROUP BY
                 1
         ) 
-        as last_week
+        AS last_week
     INNER JOIN
         (
-            select
+            SELECT
                 industry_name,
-                sum(visits) as visits,
-                cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
-            from
+                SUM(visits) AS visits,
+                CAST(CAST(SUM(bounced) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
                 (
-                    select
+                    SELECT
                         industry_name,
-                        count (distinct visit_iid) as visits,
-                        count(distinct bounced_visit_iid) bounced,
-                    from
+                        COUNT(DISTINCT visit_iid) AS visits,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced
+                    FROM
                         v_funnel_facts_analysts
-                    where
-                        unified_date between trunc(getdate()-38) AND trunc(getdate()-31) and traffic_type = 'users' and site_name is not null
-                        and industry_name = 'Gaming' and site_id IN (10052,10059,284,10028)  
-                    group by
+                    WHERE
+                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) AND traffic_type = 'users' AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' AND site_id IN(10052, 10059, 284, 10028)  
+                    GROUP BY
                         1
                 )
-            group by
+            GROUP BY
                 1
         )
-        as last_5_weeks
-    ON last_5_weeks.industry_name=last_week.industry_name 
-    group by
+        AS last_5_weeks
+    ON last_5_weeks.industry_name = last_week.industry_name 
+    GROUP BY
         1, 2
 `;
 
@@ -296,58 +296,58 @@ const SPORTS_AU = `
 const SPORTS_FR = `
     SELECT
         last_week.industry_name AS industry, 
-        'Sports FR' as vertical ,
+        'Sports FR' AS vertical,
         'BR' AS metric, 
-        sum(last_week.BR) as value
+        SUM(last_week.BR) AS value
     FROM
         (
-            select
+            SELECT
                 industry_name,
-                cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
-            from
+                CAST(CAST(SUM(bounced) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
                 (
-                    select
+                    SELECT
                         industry_name,
-                        count (distinct visit_iid) as visits,
-                        count(distinct bounced_visit_iid) bounced,
-                    from
+                        COUNT(DISTINCT visit_iid) AS visits,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced
+                    FROM
                         v_funnel_facts_analysts
-                    where
-                        unified_date BETWEEN trunc(getdate()-9) and trunc(getdate()-2) and traffic_type = 'users' and site_name is not null
-                        and industry_name = 'Gaming' and site_id IN (91,215) 
-                    group by
+                    WHERE
+                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) AND traffic_type = 'users' AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' AND site_id IN(91, 215) 
+                    GROUP BY
                         1
                 )
-            group by
+            GROUP BY
                 1
         )
-        as last_week
+        AS last_week
     INNER JOIN
         (
-            select 
+            SELECT 
                 industry_name,
-                sum(visits) as visits,
-                cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
-            from
+                SUM(visits) AS visits,
+                CAST(CAST(SUM(bounced) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
                 (
-                    select
+                    SELECT
                         industry_name,
-                        count (distinct visit_iid) as visits,
-                        count(distinct bounced_visit_iid) bounced ,
-                    from
+                        COUNT(DISTINCT visit_iid) AS visits,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced
+                    FROM
                         v_funnel_facts_analysts
-                    where
-                        unified_date between trunc(getdate()-38) AND trunc(getdate()-31) and traffic_type = 'users' and site_name is not null
-                        and industry_name = 'Gaming' and site_id IN (91,215) 
-                    group by
+                    WHERE
+                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) AND traffic_type = 'users' AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' AND site_id IN(91, 215) 
+                    GROUP BY
                         1
                 )
-            group by
+            GROUP BY
                 1
         )
-        as last_5_weeks
-    ON last_5_weeks.industry_name=last_week.industry_name 
-    group by
+        AS last_5_weeks
+    ON last_5_weeks.industry_name = last_week.industry_name 
+    GROUP BY
         1, 2
 `;
 
@@ -355,58 +355,58 @@ const SPORTS_FR = `
 const SPORTS_RO = `
     SELECT 
         last_week.industry_name AS industry,
-        'Sports RO' as vertical,
+        'Sports RO' AS vertical,
         'BR' AS metric, 
-        sum(last_week.BR) as value
+        SUM(last_week.BR) AS value
     FROM
         (
-            select
+            SELECT
                 industry_name,
-                cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
-            from
+                CAST(CAST(SUM(bounced) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
                 (
-                    select
+                    SELECT
                         industry_name,
-                        count (distinct visit_iid) as visits,
-                        count(distinct bounced_visit_iid) bounced,
-                    from
+                        COUNT(DISTINCT visit_iid) AS visits,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced
+                    FROM
                         v_funnel_facts_analysts
-                    where
-                        unified_date BETWEEN trunc(getdate()-9) and trunc(getdate()-2) and traffic_type = 'users' and site_name is not null
-                        and industry_name = 'Gaming' and site_id IN (10091) 
-                    group by
+                    WHERE
+                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) AND traffic_type = 'users' AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' AND site_id IN(10091) 
+                    GROUP BY
                         1
                 )
-            group by
+            GROUP BY
                 1
         )
-        as last_week
+        AS last_week
     INNER JOIN
         (
-            select 
+            SELECT 
                 industry_name,
-                sum(visits) as visits,
-                cast(cast(sum(bounced) as float)/cast(sum(visits) as float) as float) as BR
-            from
+                SUM(visits) AS visits,
+                CAST(CAST(SUM(bounced) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
                 (
-                    select 
+                    SELECT 
                         industry_name,
-                        count (distinct visit_iid) as visits,
-                        count(distinct bounced_visit_iid) bounced,
-                    from
+                        COUNT(DISTINCT visit_iid) AS visits,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced
+                    FROM
                         v_funnel_facts_analysts
-                    where
-                        unified_date between trunc(getdate()-38) AND trunc(getdate()-31) and traffic_type = 'users' and site_name is not null
-                        and industry_name = 'Gaming' and site_id IN (10091)  
-                    group by 
+                    WHERE
+                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) AND traffic_type = 'users' AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' AND site_id IN(10091)  
+                    GROUP BY
                         1
                 )
-            group by
+            GROUP BY
                 1
         )
-        as last_5_weeks
-    ON last_5_weeks.industry_name=last_week.industry_name 
-    group by
+        AS last_5_weeks
+    ON last_5_weeks.industry_name = last_week.industry_name 
+    GROUP BY
         1, 2
 `;
 
@@ -423,4 +423,3 @@ const queries = {
 module.exports = {
     queries
 };
-
