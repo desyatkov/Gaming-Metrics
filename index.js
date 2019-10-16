@@ -3,16 +3,20 @@ const Traffic = require('./metricReaders/traffic');
 const CTR = require('./metricReaders/ctr');
 const BR = require('./metricReaders/br');
 const EPV = require('./metricReaders/epv');
+const FCP = require('./metricReaders/fcp');
+const FID = require('./metricReaders/fid');
 
 const MetricsWriter = require('./metricsWriter');
-const businessMetricWriter = new MetricsWriter('gaming_metrics');
+const gamingMetricWriter = new MetricsWriter('gaming_metrics');
 
 const READERS = {
-    'Commission': {read: Commission.getCommission, write: businessMetricWriter},
-    'Traffic': {read: Traffic.getTraffic, write: businessMetricWriter},
-    'CTR': {read: CTR.getCTR, write: businessMetricWriter},
-    'BR': {read: BR.getBR, write: businessMetricWriter},
-    'EPV': {read: EPV.getEPV, write: businessMetricWriter},
+    'Commission': {read: Commission.getCommission, write: gamingMetricWriter},
+    'Traffic': {read: Traffic.getTraffic, write: gamingMetricWriter},
+    'CTR': {read: CTR.getCTR, write: gamingMetricWriter},
+    'BR': {read: BR.getBR, write: gamingMetricWriter},
+    'EPV': {read: EPV.getEPV, write: gamingMetricWriter},
+    'FCP': {read: FCP.getFCP, write: gamingMetricWriter},
+    'FID': {read: FID.getFID, write: gamingMetricWriter}
 };
 
 const VERTICALS = [
@@ -29,10 +33,10 @@ exports.handler = async () => {
     await Promise.all(Object.entries(READERS).map(async reader => {
         try {
             console.info(`Getting INFO for ${reader[0]}`);
-            await VERTICALS.map(async industry => {
-                const data = await reader[1].read(industry);
-                await reader[1].write.writeBusinessMetrics(data);
-                console.info(`Getting ${reader[0]} for ${industry} is done`);
+            await VERTICALS.map(async vertical => {
+                const data = await reader[1].read(vertical);
+                await reader[1].write.writeGamingMetrics(data);
+                console.info(`Getting ${reader[0]} for ${vertical} is done`);
             });
             console.info(`Getting INFO for ${reader[0]} is done`);
         } catch (e) {
