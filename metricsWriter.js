@@ -47,12 +47,12 @@ class MetricsWriter {
     async writeGamingMetrics(data) {
         const inserts = data.map(row => {
             const {
+                vertical,
+                metric,
                 value,
                 color,
                 trend,
-                metric,
-                vertical,
-                industry,
+                industry
             } = row;
             return this.writeGamingMetric(vertical, metric, value, color, trend, industry);
         });
