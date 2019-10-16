@@ -1,4 +1,4 @@
-// Blackjack Mobile UK, Casino Mobile UK, Roulette Mobile UK, Slots Mobile UK, Blackjack UK, Casino UK, Roulette UK, Slots UK
+// Blackjack Mobile UK - 252, Casino Mobile UK - 130, Roulette Mobile UK - 254, Slots Mobile UK - 242, Blackjack UK - 248, Casino UK - 19, Roulette UK - 255, Slots UK - 244
 const CASINO_UK = `
     SELECT
         last_week.industry_name AS industry,
@@ -56,7 +56,7 @@ const CASINO_UK = `
         1, 2
 `;
 
-// Sports Betting UK, Sports Betting Mobile UK
+// Sports Betting UK - 52, Sports Betting Mobile UK - 116
 const SPORTS_UK = `
     SELECT
         last_week.industry_name AS industry,
@@ -115,7 +115,7 @@ const SPORTS_UK = `
         1, 2
 `;
 
-// Bingo Mobile UK, Bingo UK
+// Bingo Mobile UK - 119, Bingo UK - 86
 const BINGO_UK = `
     SELECT
         last_week.industry_name AS industry,
@@ -173,7 +173,7 @@ const BINGO_UK = `
         1, 2
 `;
 
-// Poker Mobile UK, Poker UK
+// Poker Mobile UK - 177, Poker UK - 21
 const POKER_UK = `
     SELECT 
         last_week.industry_name AS industry, 
@@ -233,7 +233,7 @@ const POKER_UK = `
         1, 2
 `;
 
-// HorseRacing Mobile AU, HorseRacing AU, Sports Betting Mobile AU, Sports Betting AU
+// HorseRacing AU - 10052, HorseRacing Mobile AU - 10059, Sports Betting Mobile AU - 284, Sports Betting AU - 10028
 const SPORTS_AU = `
     SELECT
         last_week.industry_name AS industry,
@@ -292,7 +292,7 @@ const SPORTS_AU = `
         1, 2
 `;
 
-// Sports Betting FR, Sports Betting Mobile FR
+// Sports Betting FR - 91, Sports Betting Mobile FR - 215
 const SPORTS_FR = `
     SELECT
         last_week.industry_name AS industry, 
@@ -351,7 +351,7 @@ const SPORTS_FR = `
         1, 2
 `;
 
-// Sports Betting Mobile RO
+// Sports Betting Mobile RO - 10091
 const SPORTS_RO = `
     SELECT 
         last_week.industry_name AS industry,
