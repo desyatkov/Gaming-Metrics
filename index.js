@@ -3,8 +3,6 @@ const Traffic = require('./metricReaders/traffic');
 const CTR = require('./metricReaders/ctr');
 const BR = require('./metricReaders/br');
 const EPV = require('./metricReaders/epv');
-const FCP = require('./metricReaders/fcp');
-const FID = require('./metricReaders/fid');
 
 const MetricsWriter = require('./metricsWriter');
 const businessMetricWriter = new MetricsWriter('gaming_metrics');
@@ -15,8 +13,6 @@ const READERS = {
     'CTR': {read: CTR.getCTR, write: businessMetricWriter},
     'BR': {read: BR.getBR, write: businessMetricWriter},
     'EPV': {read: EPV.getEPV, write: businessMetricWriter},
-    'FCP': {read: FCP.getBR, write: businessMetricWriter},
-    'FID': {read: FID.getBR, write: businessMetricWriter}
 };
 
 const VERTICALS = [
@@ -36,7 +32,7 @@ exports.handler = async () => {
             await VERTICALS.map(async industry => {
                 const data = await reader[1].read(industry);
                 await reader[1].write.writeBusinessMetrics(data);
-                console.info(`Getting INFO for ${industry} is done`);
+                console.info(`Getting ${reader[0]} for ${industry} is done`);
             });
             console.info(`Getting INFO for ${reader[0]} is done`);
         } catch (e) {

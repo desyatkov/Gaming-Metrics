@@ -19,7 +19,7 @@ async function getEPV(industry) {
         const {value} = row;
         return {
             ...row,
-            color: Number(value) + 0.2,
+            color: Number(value) + 0.2
         }
     });
 }
