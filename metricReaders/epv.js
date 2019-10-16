@@ -10,9 +10,9 @@ const {
 
 const client = new Client({host, port, database, user, password});
 
-async function getEPV(industry) {
+async function getEPV(vertical) {
     await client.connect();
-    const {rows} = await client.query(QUERIES[industry]);
+    const {rows} = await client.query(QUERIES[vertical]);
     await client.end();
 
     return rows.map(row => {

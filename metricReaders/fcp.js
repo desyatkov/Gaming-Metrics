@@ -10,9 +10,9 @@ const {
 
 const client = new Client({host, port, database, user, password});
 
-async function getFCP() {
+async function getFCP(vertical) {
     await client.connect();
-    const {rows} = await client.query(QUERIES.FCP);
+    const {rows} = await client.query(QUERIES[vertical]);
     await client.end();
 
     return rows.map(row => {

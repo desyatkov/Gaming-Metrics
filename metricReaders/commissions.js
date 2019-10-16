@@ -10,9 +10,9 @@ const {
 
 const client = new Client({host, port, database, user, password});
 
-async function getCommission(queryName) {
+async function getCommission(vertical) {
     await client.connect();
-    const {rows} = await client.query(QUERIES[queryName]);
+    const {rows} = await client.query(QUERIES[vertical]);
     await client.end();
 
     return rows.map(row => {

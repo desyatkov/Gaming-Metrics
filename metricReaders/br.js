@@ -10,17 +10,16 @@ const {
 
 const client = new Client({host, port, database, user, password});
 
-async function getBR(industry) {
+async function getBR(vertical) {
     await client.connect();
-    const {rows} = await client.query(QUERIES[industry]);
+    const {rows} = await client.query(QUERIES[vertical]);
     await client.end();
 
     return rows.map(row => {
-        const {value, trend} = row;
+        const {value} = row;
         return {
             ...row,
             color: Number(value) + 0.2,
-            trend
         }
     });
 }
