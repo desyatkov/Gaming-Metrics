@@ -397,7 +397,7 @@ const SPORTS_RO = `
                     FROM
                         v_funnel_facts_analysts
                     WHERE
-                        unified_date BWTWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31)  AND traffic_type = 'users' AND site_name IS NOT NULL
+                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31)  AND traffic_type = 'users' AND site_name IS NOT NULL
                         and industry_name = 'Gaming' and site_id IN(10091)
                     GROUP BY
                         1
