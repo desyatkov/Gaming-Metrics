@@ -19,8 +19,12 @@ const CASINO_UK = `
                     FROM 
                         v_funnel_facts_analysts
                     WHERE
-                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) AND traffic_type = 'users' AND site_name IS NOT NULL
-                        AND industry_name = 'Gaming' AND site_id IN(252, 130, 254, 242, 248, 19, 255, 244) AND country_name = 'United Kingdom'
+                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) 
+                        AND traffic_type = 'users' 
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' 
+                        AND site_id IN(252, 130, 254, 242, 248, 19, 255, 244) 
+                        AND country_name = 'United Kingdom'
                     GROUP BY
                         1
                 )
@@ -42,8 +46,12 @@ const CASINO_UK = `
                     FROM
                         v_funnel_facts_analysts
                     WHERE
-                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) AND traffic_type = 'users' AND site_name IS NOT NULL
-                        AND industry_name = 'Gaming' AND site_id IN(252, 130, 254, 242, 248, 19, 255, 244) AND country_name = 'United Kingdom'
+                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) 
+                        AND traffic_type = 'users' 
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' 
+                        AND site_id IN(252, 130, 254, 242, 248, 19, 255, 244) 
+                        AND country_name = 'United Kingdom'
                     GROUP BY
                         1
                 )
@@ -77,8 +85,12 @@ const SPORTS_UK = `
                     FROM
                         v_funnel_facts_analysts
                     WHERE
-                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) AND traffic_type = 'users' AND site_name IS NOT NULL
-                        AND industry_name = 'Gaming' AND site_id IN(52, 116) AND country_name = 'United Kingdom'
+                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) 
+                        AND traffic_type = 'users' 
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' 
+                        AND site_id IN(52, 116) 
+                        AND country_name = 'United Kingdom'
                     GROUP BY
                         1
                 )
@@ -101,8 +113,12 @@ const SPORTS_UK = `
                     FROM
                         v_funnel_facts_analysts
                     WHERE
-                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) AND traffic_type = 'users' AND site_name IS NOT NULL
-                        AND industry_name = 'Gaming' AND site_id IN(52, 116) AND country_name = 'United Kingdom'
+                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) 
+                        AND traffic_type = 'users' 
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' 
+                        AND site_id IN(52, 116) 
+                        AND country_name = 'United Kingdom'
                     GROUP BY
                         1
                 )
@@ -136,8 +152,12 @@ const BINGO_UK = `
                     FROM
                         v_funnel_facts_analysts
                     WHERE
-                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) AND traffic_type = 'users' AND site_name IS NOT NULL
-                        AND industry_name = 'Gaming' AND site_id IN(119, 86) AND country_name = 'United Kingdom'
+                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) 
+                        AND traffic_type = 'users' 
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' 
+                        AND site_id IN(119, 86) 
+                        AND country_name = 'United Kingdom'
                     GROUP BY
                         1
                 )
@@ -159,8 +179,12 @@ const BINGO_UK = `
                     FROM
                         v_funnel_facts_analysts
                     WHERE
-                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) AND traffic_type = 'users' AND site_name IS NOT NULL
-                        AND industry_name = 'Gaming' AND site_id IN(119, 86) AND country_name = 'United Kingdom'
+                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) 
+                        AND traffic_type = 'users' 
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' 
+                        AND site_id IN(119, 86) 
+                        AND country_name = 'United Kingdom'
                     GROUP BY 
                         1
                 )
@@ -185,7 +209,7 @@ const POKER_UK = `
             SELECT
                 industry_name,
                 SUM(visits) AS visits,
-                CAST(CAST(SUM(bounced) AS FLOAT) / CAST(SUM(visits) AS FLOAYT) AS FLOAT) AS BR
+                CAST(CAST(SUM(bounced) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
             FROM
                 (
                     SELECT 
@@ -195,8 +219,12 @@ const POKER_UK = `
                     FROM 
                         v_funnel_facts_analysts
                     WHERE
-                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) AND traffic_type = 'users' AND site_name IS NOT NULL
-                        AND industry_name = 'Gaming' AND site_id IN(177, 21) AND country_name = 'United Kingdom'
+                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) 
+                        AND traffic_type = 'users' 
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' 
+                        AND site_id IN(177, 21) 
+                        AND country_name = 'United Kingdom'
                     GROUP BY 
                         1
                 )
@@ -219,8 +247,12 @@ const POKER_UK = `
                     FROM
                         v_funnel_facts_analysts
                     WHERE
-                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) AND traffic_type = 'users' AND site_name IS NOT NULL
-                        AND industry_name = 'Gaming' AND site_id IN(177, 21) AND country_name = 'United Kingdom'
+                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) 
+                        AND traffic_type = 'users' 
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' 
+                        AND site_id IN(177, 21) 
+                        AND country_name = 'United Kingdom'
                     GROUP BY
                         1
                 )
@@ -254,8 +286,11 @@ const SPORTS_AU = `
                     FROM
                         v_funnel_facts_analysts
                     WHERE
-                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) AND traffic_type = 'users' AND site_name IS NOT NULL
-                        AND industry_name = 'Gaming' AND site_id IN(10052, 10059, 284, 10028) 
+                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) 
+                        AND traffic_type = 'users' 
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' 
+                        AND site_id IN(10052, 10059, 284, 10028) 
                     GROUP BY
                         1
                 )
@@ -278,8 +313,11 @@ const SPORTS_AU = `
                     FROM
                         v_funnel_facts_analysts
                     WHERE
-                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) AND traffic_type = 'users' AND site_name IS NOT NULL
-                        AND industry_name = 'Gaming' AND site_id IN(10052, 10059, 284, 10028)  
+                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) 
+                        AND traffic_type = 'users' 
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' 
+                        AND site_id IN(10052, 10059, 284, 10028)  
                     GROUP BY
                         1
                 )
@@ -313,8 +351,11 @@ const SPORTS_FR = `
                     FROM
                         v_funnel_facts_analysts
                     WHERE
-                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) AND traffic_type = 'users' AND site_name IS NOT NULL
-                        AND industry_name = 'Gaming' AND site_id IN(91, 215) 
+                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) 
+                        AND traffic_type = 'users' 
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' 
+                        AND site_id IN(91, 215) 
                     GROUP BY
                         1
                 )
@@ -337,8 +378,11 @@ const SPORTS_FR = `
                     FROM
                         v_funnel_facts_analysts
                     WHERE
-                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) AND traffic_type = 'users' AND site_name IS NOT NULL
-                        AND industry_name = 'Gaming' AND site_id IN(91, 215) 
+                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) 
+                        AND traffic_type = 'users' 
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' 
+                        AND site_id IN(91, 215) 
                     GROUP BY
                         1
                 )
@@ -372,8 +416,11 @@ const SPORTS_RO = `
                     FROM
                         v_funnel_facts_analysts
                     WHERE
-                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) AND traffic_type = 'users' AND site_name IS NOT NULL
-                        AND industry_name = 'Gaming' AND site_id IN(10091) 
+                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) 
+                        AND traffic_type = 'users' 
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' 
+                        AND site_id IN(10091) 
                     GROUP BY
                         1
                 )
@@ -396,8 +443,11 @@ const SPORTS_RO = `
                     FROM
                         v_funnel_facts_analysts
                     WHERE
-                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) AND traffic_type = 'users' AND site_name IS NOT NULL
-                        AND industry_name = 'Gaming' AND site_id IN(10091)  
+                        unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) 
+                        AND traffic_type = 'users' 
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' 
+                        AND site_id IN(10091)  
                     GROUP BY
                         1
                 )
