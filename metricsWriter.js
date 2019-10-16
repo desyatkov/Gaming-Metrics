@@ -3,9 +3,8 @@ const Influx = require('influx');
 class MetricsWriter {
     constructor(measurement, conf = {}) {
         const {
-            // host = 'influxdb01.naturalint.com',
-            host = 'localhost',
-            database = 'heartbeat'
+            host = 'influxdb01.naturalint.com',
+            database = 'gaming_metrics'
         } = conf;
         this.measurement = measurement;
         this.influx = new Influx.InfluxDB({
@@ -41,11 +40,11 @@ class MetricsWriter {
         }
     }
 
-    async writeBusinessMetric(vertical, metric, value, color, trend, industry) {
+    async writeGamingMetric(vertical, metric, value, color, trend, industry) {
         this.writeMetrics(this.measurement, {vertical, metric, industry}, {color, value, trend});
     }
 
-    async writeBusinessMetrics(data) {
+    async writeGamingMetrics(data) {
         const inserts = data.map(row => {
             const {
                 value,
@@ -55,7 +54,7 @@ class MetricsWriter {
                 vertical,
                 industry,
             } = row;
-            return this.writeBusinessMetric(vertical, metric, value, color, trend, industry);
+            return this.writeGamingMetric(vertical, metric, value, color, trend, industry);
         });
         return Promise.all(inserts);
     }
