@@ -23,7 +23,6 @@ const CASINO_UK = `
                         action = 'FCP' 
                         AND LEN(value) < 6 
                         AND value * 1 < 2500 
-                        AND site_id IN(252, 130, 254, 242, 248, 19, 255, 244)
                     GROUP BY 
                         1
                 )
@@ -39,7 +38,6 @@ const CASINO_UK = `
                         action = 'FCP' 
                         AND LEN(value) < 6 
                         AND value * 1 > 2500
-                        AND site_id IN(252, 130, 254, 242, 248, 19, 255, 244)
                     GROUP BY 
                         1
                 )
@@ -47,6 +45,7 @@ const CASINO_UK = `
             ON fcp_bad.visit_iid = v_funnel_facts_analysts.visit_iid
             WHERE 
                 unified_date >= GETDATE() - 30
+                AND site_id IN(252, 130, 254, 242, 248, 19, 255, 244)
             GROUP BY 
                 1
         )
@@ -80,7 +79,6 @@ const SPORTS_UK = `
                         action = 'FCP' 
                         AND LEN(value) < 6 
                         AND value * 1 < 2500 
-                        AND site_id IN(52, 116)
                     GROUP BY 
                         1
                 )
@@ -96,7 +94,6 @@ const SPORTS_UK = `
                         action = 'FCP' 
                         AND LEN(value) < 6 
                         AND value * 1 > 2500
-                        AND site_id IN(52, 116)
                     GROUP BY 
                         1
                 )
@@ -104,6 +101,7 @@ const SPORTS_UK = `
             ON fcp_bad.visit_iid = v_funnel_facts_analysts.visit_iid
             WHERE 
                 unified_date >= GETDATE() - 30
+                AND site_id IN(52, 116)
             GROUP BY 
                 1
         )
@@ -137,7 +135,6 @@ const BINGO_UK = `
                         action = 'FCP' 
                         AND LEN(value) < 6 
                         AND value * 1 < 2500 
-                        AND site_id IN(119, 86)
                     GROUP BY 
                         1
                 )
@@ -153,7 +150,6 @@ const BINGO_UK = `
                         action = 'FCP' 
                         AND LEN(value) < 6 
                         AND value * 1 > 2500
-                        AND site_id IN(119, 86)
                     GROUP BY 
                         1
                 )
@@ -161,6 +157,7 @@ const BINGO_UK = `
             ON fcp_bad.visit_iid = v_funnel_facts_analysts.visit_iid
             WHERE 
                 unified_date >= GETDATE() - 30
+                AND site_id IN(119, 86)
             GROUP BY 
                 1
         )
@@ -194,7 +191,6 @@ const POKER_UK = `
                         action = 'FCP' 
                         AND LEN(value) < 6 
                         AND value * 1 < 2500 
-                        AND site_id IN(177, 21)
                     GROUP BY 
                         1
                 )
@@ -210,7 +206,6 @@ const POKER_UK = `
                         action = 'FCP' 
                         AND LEN(value) < 6 
                         AND value * 1 > 2500
-                        AND site_id IN(177, 21)
                     GROUP BY 
                         1
                 )
@@ -218,6 +213,7 @@ const POKER_UK = `
             ON fcp_bad.visit_iid = v_funnel_facts_analysts.visit_iid
             WHERE 
                 unified_date >= GETDATE() - 30
+                AND site_id IN(177, 21)
             GROUP BY 
                 1
         )
@@ -251,7 +247,6 @@ const SPORTS_AU = `
                         action = 'FCP' 
                         AND LEN(value) < 6 
                         AND value * 1 < 2500 
-                        AND site_id IN(10052, 10059, 284, 10028)
                     GROUP BY 
                         1
                 )
@@ -267,7 +262,6 @@ const SPORTS_AU = `
                         action = 'FCP' 
                         AND LEN(value) < 6 
                         AND value * 1 > 2500
-                        AND site_id IN(10052, 10059, 284, 10028)
                     GROUP BY 
                         1
                 )
@@ -275,6 +269,7 @@ const SPORTS_AU = `
             ON fcp_bad.visit_iid = v_funnel_facts_analysts.visit_iid
             WHERE 
                 unified_date >= GETDATE() - 30
+                AND site_id IN(10052, 10059, 284, 10028)
             GROUP BY 
                 1
         )
@@ -308,7 +303,6 @@ const SPORTS_FR = `
                         action = 'FCP' 
                         AND LEN(value) < 6 
                         AND value * 1 < 2500 
-                        AND site_id IN(91, 215)
                     GROUP BY 
                         1
                 )
@@ -324,7 +318,6 @@ const SPORTS_FR = `
                         action = 'FCP' 
                         AND LEN(value) < 6 
                         AND value * 1 > 2500
-                        AND site_id IN(91, 215)
                     GROUP BY 
                         1
                 )
@@ -332,6 +325,7 @@ const SPORTS_FR = `
             ON fcp_bad.visit_iid = v_funnel_facts_analysts.visit_iid
             WHERE 
                 unified_date >= GETDATE() - 30
+                AND site_id IN(91, 215)
             GROUP BY 
                 1
         )
@@ -365,7 +359,6 @@ const SPORTS_RO = `
                         action = 'FCP' 
                         AND LEN(value) < 6 
                         AND value * 1 < 2500 
-                        AND site_id IN(10091)
                     GROUP BY 
                         1
                 )
@@ -381,7 +374,6 @@ const SPORTS_RO = `
                         action = 'FCP' 
                         AND LEN(value) < 6 
                         AND value * 1 > 2500
-                        AND site_id IN(10091)
                     GROUP BY 
                         1
                 )
@@ -389,6 +381,7 @@ const SPORTS_RO = `
             ON fcp_bad.visit_iid = v_funnel_facts_analysts.visit_iid
             WHERE 
                 unified_date >= GETDATE() - 30
+                AND site_id IN(10091)
             GROUP BY 
                 1
         )

@@ -1,11 +1,10 @@
 // Blackjack Mobile UK - 252, Casino Mobile UK - 130, Roulette Mobile UK - 254, Slots Mobile UK - 242, Blackjack UK - 248, Casino UK - 19, Roulette UK - 255, Slots UK - 244
 const CASINO_UK = `
     SELECT 
-        last_week.industry_name AS industry, 
+        last_week.industry_name, 
         'Casino UK' AS vertical, 
-        'CTR' AS metric,
-        SUM(last_week.CTR) AS value,
-        ((last_week.CTR - last_5_weeks.CTR) / (last_5_weeks.CTR + 0.001)) AS trend
+        SUM(last_5_weeks.CTR) AS last_5_weeks,
+        SUM(last_week.CTR) AS last_week
     FROM
         (
             SELECT
@@ -68,11 +67,10 @@ const CASINO_UK = `
 // Sports Betting UK - 52, Sports Betting Mobile UK - 116
 const SPORTS_UK = `
     SELECT 
-        last_week.industry_name AS industry,
-        'Sports UK' AS vertical,
-        'CTR' AS metric,
-        SUM(last_week.CTR) as value,
-        ((last_week.CTR - last_5_weeks.CTR) / (last_5_weeks.CTR + 0.001)) AS trend
+        last_week.industry_name,
+        'Sports UK' AS vertical,        
+        SUM(last_5_weeks.CTR) AS last_5_weeks,
+        SUM(last_week.CTR) AS last_week
     FROM
         (
             SELECT
@@ -135,11 +133,10 @@ const SPORTS_UK = `
 // Bingo Mobile UK - 119, Bingo UK - 86
 const BINGO_UK = `
     SELECT
-        last_week.industry_name AS industry,  
+        last_week.industry_name,  
         'Bingo UK' AS vertical, 
-        'CTR' AS metric,
-        SUM(last_week.CTR) AS value,
-        ((last_week.CTR - last_5_weeks.CTR) / (last_5_weeks.CTR + 0.001)) AS trend
+        SUM(last_5_weeks.CTR) AS last_5_weeks,
+        SUM(last_week.CTR) AS last_week
     FROM
         (
             SELECT 
@@ -202,11 +199,10 @@ const BINGO_UK = `
 // Poker Mobile UK - 177, Poker UK - 21
 const POKER_UK = `
     SELECT 
-        last_week.industry_name AS industry, 
+        last_week.industry_name, 
         'Poker UK' AS vertical, 
-        'CTR' AS metric,
-        SUM(last_week.CTR) AS value,
-        ((last_week.CTR - last_5_weeks.CTR) / (last_5_weeks.CTR + 0.001)) AS trend
+        SUM(last_5_weeks.CTR) AS last_5_weeks,
+        SUM(last_week.CTR) AS last_week
     FROM
         (
             SELECT
@@ -269,11 +265,10 @@ const POKER_UK = `
 // HorseRacing AU - 10052, HorseRacing Mobile AU - 10059, Sports Betting Mobile AU - 284, Sports Betting AU - 10028
 const SPORTS_AU = `
     SELECT 
-        last_week.industry_name AS industry, 
+        last_week.industry_name, 
         'Sports AU' AS vertical, 
-        'CTR' AS metric,
-        SUM(last_week.CTR) AS value,
-        ((last_week.CTR - last_5_weeks.CTR) / (last_5_weeks.CTR + 0.001)) AS trend
+        SUM(last_5_weeks.CTR) AS last_5_weeks,
+        SUM(last_week.CTR) AS last_week
     FROM
         (
             SELECT
@@ -334,11 +329,10 @@ const SPORTS_AU = `
 // Sports Betting FR - 91, Sports Betting Mobile FR - 215
 const SPORTS_FR = `
     SELECT 
-        last_week.industry_name AS industry, 
+        last_week.industry_name, 
         'Sports FR' AS vertical, 
-        'CTR' AS metric,
-        SUM(last_week.CTR) AS value,
-        ((last_week.CTR - last_5_weeks.CTR) / (last_5_weeks.CTR + 0.001)) AS trend
+        SUM(last_5_weeks.CTR) AS last_5_weeks,
+        SUM(last_week.CTR) AS last_week
     FROM
         (
             SELECT
@@ -400,10 +394,9 @@ const SPORTS_FR = `
 const SPORTS_RO = `
     SELECT 
         last_week.industry_name AS industry, 
-        'Sports RO' AS vertical,
-        'CTR' AS metric,
-        SUM(last_week.CTR) AS value,
-        ((last_week.CTR - last_5_weeks.CTR) / (last_5_weeks.CTR + 0.001)) AS trend
+        'Sports RO' AS vertical, 
+        SUM(last_5_weeks.CTR) AS last_5_weeks,
+        SUM(last_week.CTR) AS last_week
     FROM
         (
             SELECT 

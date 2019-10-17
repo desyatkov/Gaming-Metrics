@@ -1,11 +1,10 @@
 // Blackjack Mobile UK, Casino Mobile UK, Roulette Mobile UK, Slots Mobile UK, Blackjack UK, Casino UK, Roulette UK, Slots UK
 const CASINO_UK = `
     SELECT 
-        last_week.industry_name AS industry, 
-        'Casino UK' AS vertical, 
-        'Traffic' AS metric,
-        SUM(last_week.visits) AS value,
-        ((last_week.visits - last_5_weeks.visits) / (last_5_weeks.visits + 0.001)) AS trend
+        last_week.industry_name, 
+        'Casino UK' AS vertical,
+        SUM(last_5_weeks.visits) AS last_5_weeks,
+        SUM(last_week.visits) AS last_week
     FROM
         (
             SELECT
@@ -66,11 +65,10 @@ const CASINO_UK = `
 // Sports Betting UK, Sports Betting Mobile UK
 const SPORTS_UK = `
     SELECT 
-        last_week.industry_name AS industry, 
+        last_week.industry_name, 
         'Sports UK' AS vertical, 
-        'Traffic' AS metric,
-        SUM(last_week.visits) AS value,
-        ((last_week.visits - last_5_weeks.visits) / (last_5_weeks.visits + 0.001)) AS trend
+        SUM(last_5_weeks.visits) AS last_5_weeks,
+        SUM(last_week.visits) AS last_week
     FROM
         (
             SELECT
@@ -101,7 +99,7 @@ const SPORTS_UK = `
         (
             SELECT
                 industry_name,
-                SUM(visits) AS visits,
+                SUM(visits) AS visits
             FROM
                 (
                     SELECT
@@ -131,11 +129,10 @@ const SPORTS_UK = `
 // Bingo Mobile UK, Bingo UK
 const BINGO_UK = `
     SELECT 
-        last_week.industry_name AS industry,  
+        last_week.industry_name,  
         'Bingo UK' AS vertical,
-        'Traffic' AS metric,
-        SUM(last_week.visits) AS value,
-        ((last_week.visits - last_5_weeks.visits) / (last_5_weeks.visits + 0.001)) AS trend
+        SUM(last_5_weeks.visits) AS last_5_weeks,
+        SUM(last_week.visits) AS last_week      
     FROM
         (
             SELECT
@@ -196,11 +193,10 @@ const BINGO_UK = `
 // Poker Mobile UK, Poker UK
 const POKER_UK = `
     SELECT 
-        last_week.industry_name AS industry, 
+        last_week.industry_name, 
         'Poker UK' AS vertical,
-        'Traffic' AS metric,
-        SUM(last_week.visits) AS value,
-        ((last_week.visits - last_5_weeks.visits) / (last_5_weeks.visits + 0.001)) AS trend
+        SUM(last_5_weeks.visits) AS last_5_weeks,
+        SUM(last_week.visits) AS last_week
     FROM
         (
             SELECT
@@ -261,11 +257,10 @@ const POKER_UK = `
 // HorseRacing Mobile AU, HorseRacing AU, Sports Betting Mobile AU, Sports Betting AU
 const SPORTS_AU = `
     SELECT 
-        last_week.industry_name AS industry, 
+        last_week.industry_name, 
         'Sports AU' AS vertical, 
-        'Traffic' AS metric,
-        SUM(last_week.visits) AS value,
-        ((last_week.visits - last_5_weeks.visits) / (last_5_weeks.visits + 0.001)) AS trend
+        SUM(last_5_weeks.visits) AS last_5_weeks,
+        SUM(last_week.visits) AS last_week
     FROM
         (
             SELECT
@@ -324,17 +319,15 @@ const SPORTS_AU = `
 // Sports Betting FR, Sports Betting Mobile FR
 const SPORTS_FR = `
     SELECT 
-        last_week.industry_name AS industry, 
+        last_week.industry_name, 
         'Sports FR' AS vertical, 
-        'Traffic' AS metric,
-        SUM(last_week.visits) AS value,
-        ((last_week.visits - last_5_weeks.visits) / (last_5_weeks.visits + 0.001)) AS trend
+        SUM(last_5_weeks.visits) AS last_5_weeks,    
+        SUM(last_week.visits) AS last_week
     FROM
         (
             SELECT
                 industry_name,
-                SUM(visits) AS visits,
-                SUM(revenue_factored) AS revenue
+                SUM(visits) AS visits
             FROM
                 (
                     SELECT
@@ -387,29 +380,28 @@ const SPORTS_FR = `
 
 // Sports Betting Mobile RO
 const SPORTS_RO = `
-    SELECT 
-        last_week.industry_name AS industry, 
-        'Sports RO' AS vertical, 
-        'Traffic' AS metric,
-        SUM(last_week.visits) AS value,
-        ((last_week.visits - last_5_weeks.visits) / (last_5_weeks.visits + 0.001)) AS trend
+    SELECT
+         last_week.industry_name,
+         'Sports RO' AS vertical,
+         SUM(last_5_weeks.visits) AS last_5_weeks,
+         SUM(last_week.visits) AS last_week
     FROM
         (
             SELECT
                 industry_name,
-                SUM(visits) AS visits
+                SUM(visits) AS visits                
             FROM
                 (
-                    SELECT
+                    SELECT 
                         industry_name,
-                        COUNT(DISTINCT visit_iid) AS visits
+                        COUNT(DISTINCT visit_iid) AS visits                        
                     FROM
                         v_funnel_facts_analysts
                     WHERE
-                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) 
-                        AND traffic_type = 'users' 
+                        unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2)
+                        AND traffic_type = 'users'
                         AND site_name IS NOT NULL
-                        AND industry_name = 'Gaming' 
+                        AND industry_name = 'Gaming'
                         AND site_id IN(10091) 
                     GROUP BY
                         1
@@ -417,7 +409,7 @@ const SPORTS_RO = `
             GROUP BY
                 1
         )
-        AS last_week
+         AS last_week
     INNER JOIN
         (
             SELECT
@@ -432,9 +424,9 @@ const SPORTS_RO = `
                         v_funnel_facts_analysts
                     WHERE
                         unified_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31) 
-                        AND traffic_type = 'users' 
+                        AND traffic_type = 'users'
                         AND site_name IS NOT NULL
-                        AND industry_name = 'Gaming' 
+                        AND industry_name = 'Gaming'
                         AND site_id IN(10091)  
                     GROUP BY
                         1
@@ -445,7 +437,7 @@ const SPORTS_RO = `
         AS last_5_weeks
     ON last_5_weeks.industry_name = last_week.industry_name 
     GROUP BY
-        1, 2
+        1, 2   
 `;
 
 const queries = {
