@@ -36,7 +36,6 @@ exports.handler = async () => {
             for(let i = 0; i < VERTICALS.length; i++){
                 const data = await reader[1].read(VERTICALS[i]);
                 await reader[1].write.writeGamingMetrics(data);
-                console.info(`Getting ${reader[0]} for ${VERTICALS[i]} is done`);
             }
             console.info(`Getting INFO for ${reader[0]} is done`);
         } catch (e) {
