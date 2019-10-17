@@ -8,20 +8,25 @@ const {
     PASSWORD: password,
 } = process.env;
 
-const client = new Client({host, port, database, user, password});
-
 async function getFCP(vertical) {
+    const client = new Client({host, port, database, user, password});
     await client.connect();
     const {rows} = await client.query(QUERIES[vertical]);
     await client.end();
 
     return rows.map(row => {
+        const {
+            industry,
+            vertical,
+            metric,
+            value
+        } = row;
         return {
-            industry: row.industry,
-            metric: row.metric,
-            vertical: row.vertical,
-            value: row.value / 100.0,
-            color: row.value / 100.0 < 0.10 ? 1 : 0.1
+            industry,
+            metric,
+            vertical,
+            value: value / 100.0,
+            color: value / 100.0 < 0.10 ? 1 : 0.1
         }
     });
 }

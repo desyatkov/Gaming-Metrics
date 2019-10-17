@@ -8,17 +8,26 @@ const {
     PASSWORD: password,
 } = process.env;
 
-const client = new Client({host, port, database, user, password});
-
 async function getCTR(vertical) {
+    const client = new Client({host, port, database, user, password});
     await client.connect();
     const {rows} = await client.query(QUERIES[vertical]);
     await client.end();
 
     return rows.map(row => {
-        const {value} = row;
+        const {
+            last_week: value,
+            last_5_weeks: pastValue,
+            industry_name: industry,
+            vertical
+        } = row;
+        const trend = ((value - pastValue) / (pastValue + 0.001));
         return {
-            ...row,
+            metric: 'CTR',
+            industry,
+            vertical,
+            trend,
+            value,
             color: Number(value) + 0.2
         }
     });
