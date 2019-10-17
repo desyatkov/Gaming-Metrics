@@ -33,11 +33,11 @@ exports.handler = async () => {
     await Promise.all(Object.entries(READERS).map(async reader => {
         try {
             console.info(`Getting INFO for ${reader[0]}`);
-            await VERTICALS.map(async vertical => {
-                const data = await reader[1].read(vertical);
+            for(let i = 0; i < VERTICALS.length; i++){
+                const data = await reader[1].read(VERTICALS[i]);
                 await reader[1].write.writeGamingMetrics(data);
-                console.info(`Getting ${reader[0]} for ${vertical} is done`);
-            });
+                console.info(`Getting ${reader[0]} for ${VERTICALS[i]} is done`);
+            }
             console.info(`Getting INFO for ${reader[0]} is done`);
         } catch (e) {
             console.error(`ERROR getting data for ${reader[0]}`, e);
