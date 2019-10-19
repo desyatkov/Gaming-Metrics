@@ -393,7 +393,7 @@ const SPORTS_FR = `
 // Sports Betting Mobile RO - 10091
 const SPORTS_RO = `
     SELECT 
-        last_week.industry_name AS industry, 
+        last_week.industry_name, 
         'Sports RO' AS vertical, 
         SUM(last_5_weeks.CTR) AS last_5_weeks,
         SUM(last_week.CTR) AS last_week
@@ -408,9 +408,9 @@ const SPORTS_RO = `
                         industry_name,
                         COUNT(DISTINCT visit_iid) AS visits,
                         COUNT(DISTINCT visit_iid_product) AS clickouts
-                    from
+                    FROM
                         v_funnel_facts_analysts
-                    where
+                    WHERE
                         unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) 
                         AND traffic_type = 'users'
                         AND site_name IS NOT NULL

@@ -398,7 +398,7 @@ const SPORTS_FR = `
 // Sports Betting Mobile RO - 10091
 const SPORTS_RO = `
     SELECT 
-        last_week.industry_name AS industry,
+        last_week.industry_name,
         'Sports RO' AS vertical,
         SUM(last_5_weeks.BR) AS last_5_weeks,
         SUM(last_week.BR) AS last_week
