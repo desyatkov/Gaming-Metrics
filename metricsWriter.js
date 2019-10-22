@@ -3,7 +3,7 @@ const Influx = require('influx');
 class MetricsWriter {
     constructor(measurement, conf = {}) {
         const {
-            host = 'influxdb01.naturalint.com',
+            host = 'localhost',
             database = 'gaming_metrics'
         } = conf;
         this.measurement = measurement;
