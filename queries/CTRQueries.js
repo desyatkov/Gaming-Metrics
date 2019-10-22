@@ -408,9 +408,9 @@ const SPORTS_RO = `
                         industry_name,
                         COUNT(DISTINCT visit_iid) AS visits,
                         COUNT(DISTINCT visit_iid_product) AS clickouts
-                    from
+                    FROM
                         v_funnel_facts_analysts
-                    where
+                    WHERE
                         unified_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2) 
                         AND traffic_type = 'users'
                         AND site_name IS NOT NULL
