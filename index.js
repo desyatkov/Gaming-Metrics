@@ -57,12 +57,26 @@ const BETTER_PLAY_VERTICALS = [
 
 
 exports.handler = async () => {
-    await Promise.all(Object.entries(READERS).map(async reader => {
+
+    await Promise.all(Object.entries(GAMING_READERS).map(async reader => {
         try {
             console.info(`Getting INFO for ${reader[0]}`);
-            for(let i = 0; i < VERTICALS.length; i++){
-                const data = await reader[1].read(VERTICALS[i]);
-                await reader[1].write.writeGamingMetrics(data);
+            for(let i = 0; i < GAMING_VERTICALS.length; i++){
+                const data = await reader[1].read(GAMING_VERTICALS[i]);
+                await reader[1].write.writeMetricsData(data);
+            }
+            console.info(`Getting INFO for ${reader[0]} is done`);
+        } catch (e) {
+            console.error(`ERROR getting data for ${reader[0]}`, e);
+        }
+    }));
+
+    await Promise.all(Object.entries(BETTER_PLAY_READERS).map(async reader => {
+        try {
+            console.info(`Getting INFO for ${reader[0]}`);
+            for(let i = 0; i < BETTER_PLAY_VERTICALS.length; i++){
+                const data = await reader[1].read(BETTER_PLAY_VERTICALS[i]);
+                await reader[1].write.writeMetricsData(data);
             }
             console.info(`Getting INFO for ${reader[0]} is done`);
         } catch (e) {
