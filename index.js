@@ -37,6 +37,7 @@ const BETTER_PLAY_READERS = {
     'BetterPlay EPV': {read: BP_EPV.getEPV, write: betterPlayMetricWriter}
 };
 
+const GAMING_VERTICALS = [
     'CASINO_UK',
     'SPORTS_UK',
     'BINGO_UK',
@@ -45,6 +46,15 @@ const BETTER_PLAY_READERS = {
     'SPORTS_FR',
     'SPORTS_RO'
 ];
+
+const BETTER_PLAY_VERTICALS = [
+    'BP_CASINO',
+    'BP_SPORTS',
+    'BP_BINGO',
+    'BP_SLOTS',
+    'BP_POKER'
+];
+
 
 exports.handler = async () => {
     await Promise.all(Object.entries(READERS).map(async reader => {
