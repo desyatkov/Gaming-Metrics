@@ -2,23 +2,23 @@ const BP_CASINO = `
     SELECT
         last_week.industry_name,  
         'BetterPlay - Casino' AS vertical,
-        SUM(last_5_weeks.CTR) AS last_5_weeks, 
-        SUM(last_week.CTR) AS last_week
+        SUM(last_5_weeks.BR) AS last_5_weeks, 
+        SUM(last_week.BR) AS last_week
     FROM
         (
             SELECT
                 industry_name,
                 INITCAP(ver) AS ver,
-                CAST(CAST(SUM(clickouts) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS CTR
+                CAST(CAST(SUM(bounced) AS FLOAT) /  CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
             FROM
-                (
+                (   
                     SELECT
                         industry_name,
                         CASE 
                             WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced,
                         COUNT(DISTINCT visit_iid) AS visits
                     FROM
                         v_funnel_facts_analysts AS a
@@ -29,7 +29,7 @@ const BP_CASINO = `
                         AND industry_name = 'Gaming' 
                         AND site_id = 10071
                         AND country_name = 'United Kingdom'
-                    GROUP BY
+                    GROUP BY  
                         1, 2
                 )
             WHERE 
@@ -43,16 +43,16 @@ const BP_CASINO = `
             SELECT
                 industry_name,
                 INITCAP(ver) AS ver,
-                CAST(CAST(SUM(clickouts) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS CTR
+                CAST(CAST(SUM(bounced) AS FLOAT) /  CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
             FROM
                 (
                     SELECT
                         industry_name,
-                        CASE
+                        CASE 
                             WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced,
                         COUNT(DISTINCT visit_iid) AS visits
                     FROM
                         v_funnel_facts_analysts AS a
@@ -69,7 +69,7 @@ const BP_CASINO = `
             WHERE 
                 LOWER(ver) = 'casino' OR INITCAP(REPLACE(CASE WHEN ver LIKE '%/%' THEN SUBSTRING(ver, 1, POSITION('/' IN ver)) ELSE ver END, '/', '')) = 'Casino'
             GROUP BY  
-            1, 2
+                1, 2
         ) 
         AS last_5_weeks  
     ON last_5_weeks.industry_name = last_week.industry_name
@@ -81,14 +81,14 @@ const BP_SPORTS = `
     SELECT
         last_week.industry_name,  
         'BetterPlay - Sports' AS vertical,
-        SUM(last_5_weeks.CTR) AS last_5_weeks, 
-        SUM(last_week.CTR) AS last_week
+        SUM(last_5_weeks.BR) AS last_5_weeks, 
+        SUM(last_week.BR) AS last_week
     FROM
         (
             SELECT
                 industry_name,
                 INITCAP(ver) AS ver,
-                CAST(CAST(SUM(clickouts) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS CTR
+                CAST(CAST(SUM(bounced) AS FLOAT) /  CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
             FROM
                 (
                     SELECT
@@ -97,7 +97,7 @@ const BP_SPORTS = `
                             WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced,
                         COUNT(DISTINCT visit_iid) AS visits
                     FROM
                         v_funnel_facts_analysts AS a
@@ -122,7 +122,7 @@ const BP_SPORTS = `
             SELECT
                 industry_name,
                 INITCAP(ver) AS ver,
-                CAST(CAST(SUM(clickouts) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS CTR
+                CAST(CAST(SUM(bounced) AS FLOAT) /  CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
             FROM
                 (
                     SELECT
@@ -131,7 +131,7 @@ const BP_SPORTS = `
                             WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced,
                         COUNT(DISTINCT visit_iid) AS visits
                     FROM
                         v_funnel_facts_analysts AS a
@@ -160,14 +160,14 @@ const BP_BINGO = `
     SELECT
         last_week.industry_name,  
         'BetterPlay - Bingo' AS vertical,
-        SUM(last_5_weeks.CTR) AS last_5_weeks, 
-        SUM(last_week.CTR) AS last_week
+        SUM(last_5_weeks.BR) AS last_5_weeks, 
+        SUM(last_week.BR) AS last_week
     FROM
         (
             SELECT
                 industry_name,
                 INITCAP(ver) AS ver,
-                CAST(CAST(SUM(clickouts) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS CTR
+                CAST(CAST(SUM(bounced) AS FLOAT) /  CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
             FROM
                 (
                     SELECT
@@ -176,7 +176,7 @@ const BP_BINGO = `
                             WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced,
                         COUNT(DISTINCT visit_iid) AS visits
                     FROM
                         v_funnel_facts_analysts AS a
@@ -188,7 +188,7 @@ const BP_BINGO = `
                         AND site_id = 10071
                         AND country_name = 'United Kingdom'
                     GROUP BY  
-                    1, 2
+                        1, 2
                 )
             WHERE 
                 LOWER(ver) = 'bingo' OR INITCAP(REPLACE(CASE WHEN ver LIKE '%/%' THEN SUBSTRING(ver, 1, POSITION('/' IN ver)) ELSE ver END, '/', '')) = 'Bingo'
@@ -201,16 +201,16 @@ const BP_BINGO = `
             SELECT
                 industry_name,
                 INITCAP(ver) AS ver,
-                CAST(CAST(SUM(clickouts) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS CTR
+                CAST(CAST(SUM(bounced) AS FLOAT) /  CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
             FROM
                 (
                     SELECT
                         industry_name,
-                        CASE
+                        CASE 
                             WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced,
                         COUNT(DISTINCT visit_iid) AS visits
                     FROM
                         v_funnel_facts_analysts AS a
@@ -239,23 +239,23 @@ const BP_SLOTS = `
     SELECT
         last_week.industry_name,  
         'BetterPlay - Slots' AS vertical,
-        SUM(last_5_weeks.CTR) AS last_5_weeks, 
-        SUM(last_week.CTR) AS last_week
+        SUM(last_5_weeks.BR) AS last_5_weeks, 
+        SUM(last_week.BR) AS last_week
     FROM
         (
             SELECT
                 industry_name,
                 INITCAP(ver) AS ver,
-                CAST(CAST(SUM(clickouts) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS CTR
+                CAST(CAST(SUM(bounced) AS FLOAT) /  CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
             FROM
                 (
                     SELECT
                         industry_name,
-                        CASE 
+                        CASE
                             WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced,
                         COUNT(DISTINCT visit_iid) AS visits
                     FROM
                         v_funnel_facts_analysts AS a
@@ -280,7 +280,7 @@ const BP_SLOTS = `
             SELECT
                 industry_name,
                 INITCAP(ver) AS ver,
-                CAST(CAST(SUM(clickouts) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS CTR
+                CAST(CAST(SUM(bounced) AS FLOAT) /  CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
             FROM
                 (
                     SELECT
@@ -289,7 +289,7 @@ const BP_SLOTS = `
                             WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced,
                         COUNT(DISTINCT visit_iid) AS visits
                     FROM
                         v_funnel_facts_analysts AS a
@@ -303,7 +303,7 @@ const BP_SLOTS = `
                     GROUP BY  
                         1, 2
                 )
-            WHERE 
+            WHERE
                 LOWER(ver) = 'slots' OR INITCAP(REPLACE(CASE WHEN ver LIKE '%/%' THEN SUBSTRING(ver, 1, POSITION('/' IN ver)) ELSE ver END, '/', '')) = 'Slots'
             GROUP BY  
                 1, 2
@@ -318,14 +318,14 @@ const BP_POKER = `
     SELECT
         last_week.industry_name,  
         'BetterPlay - Poker' AS vertical,
-        SUM(last_5_weeks.CTR) AS last_5_weeks, 
-        SUM(last_week.CTR) AS last_week
+        SUM(last_5_weeks.BR) AS last_5_weeks, 
+        SUM(last_week.BR) AS last_week
     FROM
         (
             SELECT
                 industry_name,
                 INITCAP(ver) AS ver,
-                CAST(CAST(SUM(clickouts) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS CTR
+                CAST(CAST(SUM(bounced) AS FLOAT) /  CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
             FROM
                 (
                     SELECT
@@ -334,7 +334,7 @@ const BP_POKER = `
                             WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced,
                         COUNT(DISTINCT visit_iid) AS visits
                     FROM
                         v_funnel_facts_analysts AS a
@@ -359,15 +359,16 @@ const BP_POKER = `
             SELECT
                 industry_name,
                 INITCAP(ver) AS ver,
-                CAST(CAST(SUM(clickouts) AS FLOAT) / CAST(SUM(visits) AS FLOAT) AS FLOAT) AS CTR
+                CAST(CAST(SUM(bounced) AS FLOAT) /  CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
             FROM
                 (
                     SELECT
                         industry_name,
+                        CASE 
                             WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
-                        COUNT(DISTINCT visit_iid_product) AS clickouts,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced,
                         COUNT(DISTINCT visit_iid) AS visits
                     FROM
                         v_funnel_facts_analysts AS a
@@ -378,7 +379,7 @@ const BP_POKER = `
                         AND industry_name = 'Gaming'
                         AND site_id = 10071
                         AND country_name = 'United Kingdom'
-                    GROUP BY  
+                    GROUP BY
                         1, 2
                 )
             WHERE 
@@ -391,3 +392,15 @@ const BP_POKER = `
     GROUP BY  
         1, 2
 `;
+
+const BP_Queries = {
+    'BP_CASINO': BP_CASINO,
+    'BP_SPORTS': BP_SPORTS,
+    'BP_BINGO': BP_BINGO,
+    'BP_SLOTS': BP_SLOTS,
+    'BP_POKER': BP_POKER
+};
+
+module.exports = {
+    BP_Queries
+};

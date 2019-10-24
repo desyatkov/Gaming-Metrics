@@ -384,3 +384,15 @@ const BP_POKER = `
     GROUP BY 
         1, 2
 `;
+
+const BP_Queries = {
+    'BP_CASINO': BP_CASINO,
+    'BP_SPORTS': BP_SPORTS,
+    'BP_BINGO': BP_BINGO,
+    'BP_SLOTS': BP_SLOTS,
+    'BP_POKER': BP_POKER
+};
+
+module.exports = {
+    BP_Queries
+};
