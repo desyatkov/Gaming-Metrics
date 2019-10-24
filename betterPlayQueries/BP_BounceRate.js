@@ -15,7 +15,7 @@ const BP_CASINO = `
                     SELECT
                         industry_name,
                         CASE 
-                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
                         COUNT(DISTINCT bounced_visit_iid) AS bounced,
@@ -49,7 +49,7 @@ const BP_CASINO = `
                     SELECT
                         industry_name,
                         CASE 
-                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
                         COUNT(DISTINCT bounced_visit_iid) AS bounced,
@@ -93,7 +93,7 @@ const BP_SPORTS = `
                     SELECT
                         industry_name,
                         CASE 
-                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
                         COUNT(DISTINCT bounced_visit_iid) AS bounced,
@@ -127,10 +127,11 @@ const BP_SPORTS = `
                     SELECT
                         industry_name,
                         CASE 
-                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
-                        COUNT(DISTINCT bounced_visit_iid) AS bounced ,COUNT(DISTINCT visit_iid) AS visits
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced,
+                        COUNT(DISTINCT visit_iid) AS visits
                     FROM
                         v_funnel_facts_analysts AS a
                     WHERE
@@ -140,19 +141,251 @@ const BP_SPORTS = `
                         AND industry_name = 'Gaming'
                         AND site_id = 10071
                         AND country_name = 'United Kingdom'
-                    GROUP BY  1,2)
-\t\t\twhere lower(ver) = 'sports' or initcap(replace(case when ver like '%/%' then substring(ver, 1, position( '/' in ver) ) else ver end,'/','')) = 'Sports'
-            GROUP BY  1,2)
-        AS last_5_weeks  ON last_5_weeks.industry_name = last_week.industry_name
-    GROUP BY  1, 2
-
+                    GROUP BY  
+                        1, 2
+                )
+            WHERE 
+                LOWER(ver) = 'sports' OR INITCAP(REPLACE(CASE WHEN ver LIKE '%/%' THEN SUBSTRING(ver, 1, POSITION('/' IN ver)) ELSE ver END, '/', '')) = 'Sports'
+            GROUP BY  
+                1, 2
+        )
+        AS last_5_weeks  
+    ON last_5_weeks.industry_name = last_week.industry_name
+    GROUP BY  
+        1, 2
 `;
 const BP_BINGO = `
-
+    SELECT
+        last_week.industry_name,  
+        'BetterPlay - Bingo' AS vertical,
+        SUM(last_5_weeks.BR) AS last_5_weeks, 
+        SUM(last_week.BR) AS last_week
+    FROM
+        (
+            SELECT
+                industry_name,
+                INITCAP(ver) AS ver,
+                CAST(CAST(SUM(bounced) AS FLOAT) /  CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
+                (
+                    SELECT
+                        industry_name,
+                        CASE 
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
+                            WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced,
+                        COUNT(DISTINCT visit_iid) AS visits
+                    FROM
+                        v_funnel_facts_analysts AS a
+                    WHERE
+                        conversion_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2)
+                        AND traffic_type = 'users'  
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' 
+                        AND site_id = 10071
+                        AND country_name = 'United Kingdom'
+                    GROUP BY  
+                        1, 2
+                )
+            WHERE 
+                LOWER(ver) = 'bingo' OR INITCAP(REPLACE(CASE WHEN ver LIKE '%/%' THEN SUBSTRING(ver, 1, POSITION('/' IN ver)) ELSE ver END, '/', '')) = 'Bingo'
+            GROUP BY  
+                1, 2
+        )
+        AS last_week
+    INNER JOIN
+        (
+            SELECT
+                industry_name,
+                INITCAP(ver) AS ver,
+                CAST(CAST(SUM(bounced) AS FLOAT) /  CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
+                (
+                    SELECT
+                        industry_name,
+                        CASE 
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
+                            WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced,
+                        COUNT(DISTINCT visit_iid) AS visits
+                    FROM
+                        v_funnel_facts_analysts AS a
+                    WHERE
+                        conversion_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31)
+                        AND traffic_type = 'users'
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming'
+                        AND site_id = 10071
+                        AND country_name = 'United Kingdom'
+                    GROUP BY  
+                        1, 2
+                )
+            WHERE 
+                LOWER(ver) = 'bingo' OR INITCAP(REPLACE(CASE WHEN ver LIKE '%/%' THEN SUBSTRING(ver, 1, POSITION('/' IN ver)) ELSE ver END, '/', '')) = 'Bingo'
+            GROUP BY  
+                1, 2
+        )
+        AS last_5_weeks  
+    ON last_5_weeks.industry_name = last_week.industry_name
+    GROUP BY  
+        1, 2
 `;
 const BP_SLOTS = `
-
+    SELECT
+        last_week.industry_name,  
+        'BetterPlay - Slots' AS vertical,
+        SUM(last_5_weeks.BR) AS last_5_weeks, 
+        SUM(last_week.BR) AS last_week
+    FROM
+        (
+            SELECT
+                industry_name,
+                INITCAP(ver) AS ver,
+                CAST(CAST(SUM(bounced) AS FLOAT) /  CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
+                (
+                    SELECT
+                        industry_name,
+                        CASE
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
+                            WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced,
+                        COUNT(DISTINCT visit_iid) AS visits
+                    FROM
+                        v_funnel_facts_analysts AS a
+                    WHERE
+                        conversion_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2)
+                        AND traffic_type = 'users'  
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' 
+                        AND site_id = 10071
+                        AND country_name = 'United Kingdom'
+                    GROUP BY  
+                        1, 2
+                )
+            WHERE 
+                LOWER(ver) = 'slots' OR INITCAP(REPLACE(CASE WHEN ver LIKE '%/%' THEN SUBSTRING(ver, 1, POSITION('/' IN ver)) ELSE ver END, '/', '')) = 'Slots'
+            GROUP BY  
+                1, 2
+        )
+        AS last_week
+    INNER JOIN
+        (
+            SELECT
+                industry_name,
+                INITCAP(ver) AS ver,
+                CAST(CAST(SUM(bounced) AS FLOAT) /  CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
+                (
+                    SELECT
+                        industry_name,
+                        CASE 
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
+                            WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced,
+                        COUNT(DISTINCT visit_iid) AS visits
+                    FROM
+                        v_funnel_facts_analysts AS a
+                    WHERE
+                        conversion_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31)
+                        AND traffic_type = 'users'
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming'
+                        AND site_id = 10071
+                        AND country_name = 'United Kingdom'
+                    GROUP BY  
+                        1, 2
+                )
+            WHERE
+                LOWER(ver) = 'slots' OR INITCAP(REPLACE(CASE WHEN ver LIKE '%/%' THEN SUBSTRING(ver, 1, POSITION('/' IN ver)) ELSE ver END, '/', '')) = 'Slots'
+            GROUP BY  
+                1, 2
+        )
+        AS last_5_weeks  
+    ON last_5_weeks.industry_name = last_week.industry_name
+    GROUP BY  
+        1, 2
 `;
-const BP_POKER = `
 
+const BP_POKER = `
+    SELECT
+        last_week.industry_name,  
+        'BetterPlay - Poker' AS vertical,
+        SUM(last_5_weeks.BR) AS last_5_weeks, 
+        SUM(last_week.BR) AS last_week
+    FROM
+        (
+            SELECT
+                industry_name,
+                INITCAP(ver) AS ver,
+                CAST(CAST(SUM(bounced) AS FLOAT) /  CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
+                (
+                    SELECT
+                        industry_name,
+                        CASE 
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
+                            WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced,
+                        COUNT(DISTINCT visit_iid) AS visits
+                    FROM
+                        v_funnel_facts_analysts AS a
+                    WHERE
+                        conversion_date BETWEEN TRUNC(GETDATE() - 9) AND TRUNC(GETDATE() - 2)
+                        AND traffic_type = 'users'  
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming' 
+                        AND site_id = 10071
+                        AND country_name = 'United Kingdom'
+                    GROUP BY  
+                        1, 2
+                )
+            WHERE 
+                LOWER(ver) = 'poker' OR INITCAP(REPLACE(CASE WHEN ver LIKE '%/%' THEN SUBSTRING(ver, 1, POSITION('/' IN ver)) ELSE ver END, '/', '')) = 'Poker'
+            GROUP BY  
+                1, 2
+        )
+        AS last_week
+    INNER JOIN
+        (
+            SELECT
+                industry_name,
+                INITCAP(ver) AS ver,
+                CAST(CAST(SUM(bounced) AS FLOAT) /  CAST(SUM(visits) AS FLOAT) AS FLOAT) AS BR
+            FROM
+                (
+                    SELECT
+                        industry_name,
+                        CASE 
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
+                            WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
+                        COUNT(DISTINCT bounced_visit_iid) AS bounced,
+                        COUNT(DISTINCT visit_iid) AS visits
+                    FROM
+                        v_funnel_facts_analysts AS a
+                    WHERE
+                        conversion_date BETWEEN TRUNC(GETDATE() - 38) AND TRUNC(GETDATE() - 31)
+                        AND traffic_type = 'users'
+                        AND site_name IS NOT NULL
+                        AND industry_name = 'Gaming'
+                        AND site_id = 10071
+                        AND country_name = 'United Kingdom'
+                    GROUP BY
+                        1, 2
+                )
+            WHERE 
+                LOWER(ver) = 'poker' OR INITCAP(REPLACE(CASE WHEN ver LIKE '%/%' THEN SUBSTRING(ver, 1, POSITION('/' IN ver)) ELSE ver END, '/', '')) = 'Poker'
+            GROUP BY  
+                1, 2
+        )
+        AS last_5_weeks  
+    ON last_5_weeks.industry_name = last_week.industry_name
+    GROUP BY  
+        1, 2
 `;

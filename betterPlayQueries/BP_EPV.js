@@ -15,7 +15,7 @@ const BP_CASINO = `
                     SELECT
                         industry_name,
                         CASE 
-                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
                         SUM(revenue_factored) AS revenue_factored, 
@@ -49,7 +49,7 @@ const BP_CASINO = `
                     SELECT
                         industry_name,
                         CASE 
-                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
                         SUM(revenue_factored) AS revenue_factored,
@@ -94,7 +94,7 @@ const BP_SPORTS = `
                     SELECT
                         industry_name,
                         CASE 
-                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
                         SUM(revenue_factored) AS revenue_factored,
@@ -127,7 +127,7 @@ const BP_SPORTS = `
                     SELECT
                         industry_name,
                         CASE 
-                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
                         SUM(revenue_factored) AS revenue_factored,
@@ -172,7 +172,7 @@ const BP_BINGO = `
                     SELECT
                         industry_name,
                         CASE 
-                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
                         SUM(revenue_factored) AS revenue_factored, 
@@ -206,7 +206,7 @@ const BP_BINGO = `
                     SELECT
                         industry_name,
                         CASE 
-                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
                         SUM(revenue_factored) AS revenue_factored,
@@ -251,7 +251,7 @@ const BP_SLOTS = `
                     SELECT
                         industry_name,
                         CASE 
-                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
                         SUM(revenue_factored) AS revenue_factored,
@@ -285,7 +285,7 @@ const BP_SLOTS = `
                     SELECT
                         industry_name,
                         CASE 
-                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
                         SUM(revenue_factored) AS revenue_factored, 
@@ -330,7 +330,7 @@ const BP_POKER = `
                     SELECT
                         industry_name,
                         CASE 
-                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
                         SUM(revenue_factored) AS revenue_factored,
@@ -364,7 +364,7 @@ const BP_POKER = `
                     SELECT
                         industry_name,
                         CASE 
-                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
+                            WHEN a.conversion_date < '2019-09-17' THEN REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(uri, 'https://m.betterplay.com/', ''), 'https://www.betterplay.com/', ''), 'http://m.betterplay.com', ''), 'http://m.betterplay.co.uk', ''), 'http://www.betterplay.com', ''), 'https://www.betterplay.com', ''), 'http://www.betterplay.co.uk', '')
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NOT NULL THEN INITCAP(vertical_name)
                             WHEN a.conversion_date >= '2019-09-17' AND vertical_name IS NULL THEN 'General' END AS ver,
                         SUM(revenue_factored) AS revenue_factored,
