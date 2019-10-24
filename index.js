@@ -5,9 +5,26 @@ const BR = require('./metricReaders/br');
 const EPV = require('./metricReaders/epv');
 const FCP = require('./metricReaders/fcp');
 const FID = require('./metricReaders/fid');
+// Gaming Vertical Readers
+const Commission = require('./metricReaders/gaming/commissions');
+const Traffic = require('./metricReaders/gaming/traffic');
+const CTR = require('./metricReaders/gaming/ctr');
+const BR = require('./metricReaders/gaming/bounceRate');
+const EPV = require('./metricReaders/gaming/epv');
+const FCP = require('./metricReaders/gaming/fcp');
+const FID = require('./metricReaders/gaming/fid');
 
+// BetterPlay Vertical Readers
+const BP_Commission = require('./metricReaders/betterPlay/BP_Commissions');
+const BP_Traffic = require('./metricReaders/betterPlay/BP_Traffic');
+const BP_CTR = require('./metricReaders/betterPlay/BP_CTR');
+const BP_BR = require('./metricReaders/betterPlay/BP_BounceRate');
+const BP_EPV = require('./metricReaders/betterPlay/BP_EPV');
+
+// InfluxDB instances
 const MetricsWriter = require('./metricsWriter');
 const gamingMetricWriter = new MetricsWriter('gaming_metrics');
+const betterPlayMetricWriter = new MetricsWriter('betterPlay_metrics');
 
 const READERS = {
     'Commission': {read: Commission.getCommission, write: gamingMetricWriter},
