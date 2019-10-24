@@ -1,10 +1,3 @@
-const Commission = require('./metricReaders/commissions');
-const Traffic = require('./metricReaders/traffic');
-const CTR = require('./metricReaders/ctr');
-const BR = require('./metricReaders/br');
-const EPV = require('./metricReaders/epv');
-const FCP = require('./metricReaders/fcp');
-const FID = require('./metricReaders/fid');
 // Gaming Vertical Readers
 const Commission = require('./metricReaders/gaming/commissions');
 const Traffic = require('./metricReaders/gaming/traffic');
@@ -26,17 +19,24 @@ const MetricsWriter = require('./metricsWriter');
 const gamingMetricWriter = new MetricsWriter('gaming_metrics');
 const betterPlayMetricWriter = new MetricsWriter('betterPlay_metrics');
 
-const READERS = {
-    'Commission': {read: Commission.getCommission, write: gamingMetricWriter},
-    'Traffic': {read: Traffic.getTraffic, write: gamingMetricWriter},
-    'CTR': {read: CTR.getCTR, write: gamingMetricWriter},
-    'BR': {read: BR.getBR, write: gamingMetricWriter},
-    'EPV': {read: EPV.getEPV, write: gamingMetricWriter},
-    'FCP': {read: FCP.getFCP, write: gamingMetricWriter},
-    'FID': {read: FID.getFID, write: gamingMetricWriter}
+const GAMING_READERS = {
+    'Gaming Commission': {read: Commission.getCommission, write: gamingMetricWriter},
+    'Gaming Traffic': {read: Traffic.getTraffic, write: gamingMetricWriter},
+    'Gaming CTR': {read: CTR.getCTR, write: gamingMetricWriter},
+    'Gaming BR': {read: BR.getBR, write: gamingMetricWriter},
+    'Gaming EPV': {read: EPV.getEPV, write: gamingMetricWriter},
+    'Gaming FCP': {read: FCP.getFCP, write: gamingMetricWriter},
+    'Gaming FID': {read: FID.getFID, write: gamingMetricWriter}
 };
 
-const VERTICALS = [
+const BETTER_PLAY_READERS = {
+    'BetterPlay Commission': {read: BP_Commission.getCommission, write: betterPlayMetricWriter},
+    'BetterPlay Traffic': {read: BP_Traffic.getTraffic, write: betterPlayMetricWriter},
+    'BetterPlay CTR': {read: BP_CTR.getCTR, write: betterPlayMetricWriter},
+    'BetterPlay BR': {read: BP_BR.getBR, write: betterPlayMetricWriter},
+    'BetterPlay EPV': {read: BP_EPV.getEPV, write: betterPlayMetricWriter}
+};
+
     'CASINO_UK',
     'SPORTS_UK',
     'BINGO_UK',
