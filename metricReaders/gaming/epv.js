@@ -1,5 +1,5 @@
 const {Client} = require('pg');
-const QUERIES = require('../queries/FCPQueries').queries;
+const QUERIES = require('../../queries/gaming/EPVQueries').queries;
 const {
     HOST: host,
     PORT: port,
@@ -8,7 +8,7 @@ const {
     PASSWORD: password,
 } = process.env;
 
-async function getFCP(vertical) {
+async function getEPV(vertical) {
     const client = new Client({host, port, database, user, password});
     await client.connect();
     const {rows} = await client.query(QUERIES[vertical]);
@@ -16,21 +16,20 @@ async function getFCP(vertical) {
 
     return rows.map(row => {
         const {
-            industry,
-            vertical,
-            metric,
-            value
+            last_week: value,
+            industry_name: industry,
+            vertical
         } = row;
         return {
             industry,
-            metric,
+            metric: 'EPV',
             vertical,
-            value: value / 100.0,
-            color: value / 100.0 < 0.10 ? 1 : 0.1
+            value,
+            color: Number(value) + 0.2
         }
     });
 }
 
 module.exports = {
-    getFCP
+    getEPV
 };

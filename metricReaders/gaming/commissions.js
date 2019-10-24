@@ -1,5 +1,5 @@
 const {Client} = require('pg');
-const QUERIES = require('../queries/FIDQueries').queries;
+const QUERIES = require('../../queries/gaming/commissionQueries').queries;
 const {
     HOST: host,
     PORT: port,
@@ -8,7 +8,7 @@ const {
     PASSWORD: password,
 } = process.env;
 
-async function getFID(vertical) {
+async function getCommission(vertical) {
     const client = new Client({host, port, database, user, password});
     await client.connect();
     const {rows} = await client.query(QUERIES[vertical]);
@@ -16,21 +16,23 @@ async function getFID(vertical) {
 
     return rows.map(row => {
         const {
-            industry,
-            vertical,
-            metric,
-            value
+            last_week: value,
+            last_5_weeks: pastValue,
+            industry_name: industry,
+            vertical
         } = row;
+        const trend = ((value - pastValue) / (pastValue + 0.1));
         return {
             industry,
-            metric,
+            metric: 'Commission',
             vertical,
-            value: value / 100.0,
-            color: value / 100.0 < 0.10 ? 1 : 0.1
-        }
+            value,
+            color: Number(trend) + 0.65,
+            trend
+        };
     });
 }
 
 module.exports = {
-    getFID
+    getCommission
 };

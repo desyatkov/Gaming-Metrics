@@ -1,14 +1,14 @@
 const {Client} = require('pg');
-const QUERIES = require('../queries/EPVQueries').queries;
+const QUERIES = require('../../queries/gaming/bounceRateQueries').queries;
 const {
     HOST: host,
     PORT: port,
     DATABASE: database,
     USER: user,
-    PASSWORD: password,
+    PASSWORD: password
 } = process.env;
 
-async function getEPV(vertical) {
+async function getBR(vertical) {
     const client = new Client({host, port, database, user, password});
     await client.connect();
     const {rows} = await client.query(QUERIES[vertical]);
@@ -21,8 +21,8 @@ async function getEPV(vertical) {
             vertical
         } = row;
         return {
-            metric: 'EPV',
             industry,
+            metric: 'BR',
             vertical,
             value,
             color: Number(value) + 0.2
@@ -31,5 +31,5 @@ async function getEPV(vertical) {
 }
 
 module.exports = {
-    getEPV
+    getBR
 };

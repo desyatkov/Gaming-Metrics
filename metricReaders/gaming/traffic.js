@@ -1,5 +1,5 @@
 const {Client} = require('pg');
-const QUERIES = require('../queries/commissionQueries').queries;
+const QUERIES = require('../../queries/gaming/trafficQueries').queries;
 const {
     HOST: host,
     PORT: port,
@@ -8,7 +8,7 @@ const {
     PASSWORD: password,
 } = process.env;
 
-async function getCommission(vertical) {
+async function getTraffic(vertical) {
     const client = new Client({host, port, database, user, password});
     await client.connect();
     const {rows} = await client.query(QUERIES[vertical]);
@@ -21,18 +21,18 @@ async function getCommission(vertical) {
             industry_name: industry,
             vertical
         } = row;
-        const trend = ((value - pastValue) / (pastValue + 0.1));
+        const trend = ((value - pastValue) / (pastValue + 0.001));
         return {
-            metric: 'Commission',
             industry,
+            metric: 'Traffic',
             vertical,
+            value,
             color: Number(trend) + 0.65,
-            trend,
-            value
-        };
+            trend
+        }
     });
 }
 
 module.exports = {
-    getCommission
+    getTraffic
 };
