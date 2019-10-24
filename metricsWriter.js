@@ -18,15 +18,15 @@ class MetricsWriter {
                     trend: Influx.FieldType.FLOAT
                 },
                 tags: [
-                    'vertical',
+                    'industry',
                     'metric',
-                    'industry'
+                    'vertical'
                 ]
             }]
         });
     }
 
-    async writeMetrics(measurement, tags, fields) {
+    async writeMetricsToInflux(measurement, tags, fields) {
         try {
             await this.influx.writePoints([
                 {
@@ -40,21 +40,21 @@ class MetricsWriter {
         }
     }
 
-    async writeGamingMetric(vertical, metric, value, color, trend, industry) {
-        this.writeMetrics(this.measurement, {vertical, metric, industry}, {color, value, trend});
+    async writeMetric(industry, metric, vertical, value, color, trend) {
+        this.writeMetricsToInflux(this.measurement, {industry, metric, vertical}, {value, color, trend});
     }
 
-    async writeGamingMetrics(data) {
+    async writeMetricsData(data) {
         const inserts = data.map(row => {
             const {
-                vertical,
+                industry,
                 metric,
+                vertical,
                 value,
                 color,
-                trend,
-                industry
+                trend
             } = row;
-            return this.writeGamingMetric(vertical, metric, value, color, trend, industry);
+            return this.writeMetric(industry, metric, vertical, value, color, trend);
         });
         return Promise.all(inserts);
     }
