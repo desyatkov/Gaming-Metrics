@@ -5,7 +5,7 @@ const {
     PORT: port,
     DATABASE: database,
     USER: user,
-    PASSWORD: password,
+    PASSWORD: password
 } = process.env;
 
 async function getEPV(vertical) {
@@ -17,16 +17,19 @@ async function getEPV(vertical) {
     return rows.map(row => {
         const {
             last_week: value,
+            last_5_weeks: pastValue,
             industry_name: industry,
             vertical
         } = row;
+        const trend = ((value - pastValue) / (pastValue + 0.1));
         return {
             industry,
             metric: 'EPV',
             vertical,
             value,
-            color: Number(value) + 0.2
-        }
+            color: Number(value) + 0.2,
+            trend
+        };
     });
 }
 

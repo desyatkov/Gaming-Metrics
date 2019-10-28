@@ -5,7 +5,7 @@ const {
     PORT: port,
     DATABASE: database,
     USER: user,
-    PASSWORD: password,
+    PASSWORD: password
 } = process.env;
 
 async function getCommission(vertical) {

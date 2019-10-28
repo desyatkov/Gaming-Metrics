@@ -5,7 +5,7 @@ const {
     PORT: port,
     DATABASE: database,
     USER: user,
-    PASSWORD: password,
+    PASSWORD: password
 } = process.env;
 
 async function getTraffic(vertical) {
@@ -29,7 +29,7 @@ async function getTraffic(vertical) {
             value,
             color: Number(trend) + 0.65,
             trend
-        }
+        };
     });
 }
 

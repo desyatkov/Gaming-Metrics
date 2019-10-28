@@ -17,16 +17,19 @@ async function getBR(vertical) {
     return rows.map(row => {
         const {
             last_week: value,
+            last_5_weeks: pastValue,
             industry_name: industry,
             vertical
         } = row;
+        const trend = ((value - pastValue) / (pastValue + 0.001));
         return {
             industry,
             metric: 'BR',
             vertical,
             value,
-            color: Number(value) + 0.2
-        }
+            color: Number(value) + 0.2,
+            trend
+        };
     });
 }
 

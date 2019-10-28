@@ -29,7 +29,7 @@ async function getCTR(vertical) {
             value,
             color: Number(value) + 0.2,
             trend
-        }
+        };
     });
 }
 
