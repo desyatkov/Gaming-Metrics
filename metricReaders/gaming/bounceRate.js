@@ -27,7 +27,7 @@ async function getBR(vertical) {
             metric: 'BR',
             vertical,
             value,
-            color: Number(value) + 0.2,
+            color: trend > 0.05 ? 0.1 : trend < 0.05 ? 1 : 0.5,
             trend
         };
     });

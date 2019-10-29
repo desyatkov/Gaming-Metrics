@@ -27,7 +27,7 @@ async function getCTR(vertical) {
             metric: 'CTR',
             vertical,
             value,
-            color: Number(value) + 0.2,
+            color: Number(trend) + 0.2,
             trend
         };
     });
