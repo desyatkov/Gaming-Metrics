@@ -27,7 +27,7 @@ async function getTraffic(vertical) {
             metric: 'Traffic',
             vertical,
             value,
-            color: Number(trend) + 0.65,
+            color: Number(trend) < -0.05 ? 0.1 : Number(trend) > 0.05 ? 1 : 0.5,
             trend
         };
     });
